@@ -12,6 +12,7 @@ const GET_RESTAURANTS = gql`
         cuisine_type
         description
         id
+        image_url
         menu
         name
         operating_hours

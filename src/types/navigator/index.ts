@@ -1,5 +1,5 @@
 import type {NavigatorScreenParams} from '@react-navigation/native';
-import {IRestaurant} from '../ordering';
+import {ICategory, IRestaurant} from '../ordering';
 
 type BottomTabOption = {
   icon: string;
@@ -27,6 +27,9 @@ type ProductStackParamList = {
     restaurant: IRestaurant;
   };
   SearchScreen: undefined;
+  MenuItemsByCategoryScreen: {
+    category: ICategory;
+  };
 };
 
 type OrderStackParamList = {
@@ -72,7 +75,8 @@ type BottomTabScreens =
 type ProductStackScreens =
   | 'ProductsScreen'
   | 'RestaurantScreen'
-  | 'SearchScreen';
+  | 'SearchScreen'
+  | 'MenuItemsByCategoryScreen';
 
 type OrderStackScreens =
   | 'CartHomeScreen'

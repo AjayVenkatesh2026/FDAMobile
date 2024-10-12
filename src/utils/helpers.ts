@@ -6,11 +6,12 @@ import type {
   IAddress,
   IRestaurantResponse,
   IRestaurant,
+  IProduct,
 } from 'src/types/ordering';
 import copies from 'src/constants/copies';
 import {get} from 'src/storage';
 import storageKeys from 'src/storage/keys';
-import {dummyImageUrl, dummyTags} from 'src/constants/dummyData';
+import {dummyTags} from 'src/constants/dummyData';
 import {IJwtPaylod} from 'src/types/global';
 import {AppDispatch} from 'src/redux/store';
 import {clearRestaurants} from 'src/redux/slices/restaurantSlice';
@@ -110,7 +111,7 @@ const translateRestaurantResponseToRestaurant = (
   const res: IRestaurant = {
     address: restaurant.address,
     description: restaurant.description,
-    image: dummyImageUrl,
+    image: restaurant.image_url,
     distance: `${random(1, 4)} km`,
     id: restaurant.id,
     name: restaurant.name,
@@ -130,6 +131,18 @@ const clearRedux = (dispatch: AppDispatch) => {
   dispatch(clearProfile());
 };
 
+const getMenuItemsByCategoryName = ({
+  menuItems = [],
+  categoryName = '',
+}: {
+  menuItems: IProduct[];
+  categoryName: string;
+}): IProduct[] => {
+  return menuItems.filter(item =>
+    item.category.toLowerCase().includes(categoryName.toLowerCase()),
+  );
+};
+
 export {
   getInitials,
   isValidProfile,
@@ -142,4 +155,5 @@ export {
   isValidToken,
   getDecodedToken,
   clearRedux,
+  getMenuItemsByCategoryName,
 };

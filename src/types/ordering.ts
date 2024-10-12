@@ -163,6 +163,7 @@ interface IRestaurantResponse {
   description: string;
   id: string;
   name: string;
+  image_url: string;
 }
 
 interface IOrderInput {

@@ -13,6 +13,7 @@ import React from 'react';
 import {Icon, Text, TouchableRipple} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
+import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 import type {IRestaurant} from 'src/types/ordering';
 import font from 'src/styles/font';
@@ -21,8 +22,9 @@ import {useAppSelector} from 'src/hooks/reduxHooks';
 import copies from 'src/constants/copies';
 import containers from 'src/styles/containers';
 import {CLOCK_OUTLINE, HEART, HEART_OUTLINE} from 'src/constants/icons';
-import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import type {RootStackParamList} from 'src/types/navigator';
+
+import defautImage from 'src/assets/default.png';
 
 const {DOT} = copies;
 
@@ -52,7 +54,7 @@ const RestaurantCarouselCard: React.FC<IRestaurantCarouselCardProps> = ({
   const theme = useAppSelector(state => state.themeReducer.theme);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  const {image, name, distance, tags, rating, openingHours} = restaurant;
+  const {image = '', name, distance, tags, rating, openingHours} = restaurant;
   const tagsText = tags.join(` ${DOT} `);
   const description =
     showTimings && openingHours
@@ -73,8 +75,12 @@ const RestaurantCarouselCard: React.FC<IRestaurantCarouselCardProps> = ({
   return (
     <Pressable onPress={onPress}>
       <ImageBackground
-        source={{uri: image}}
-        style={[styles.bgImage, bgImageStyles]}>
+        source={image ? {uri: image} : defautImage}
+        style={[
+          styles.bgImage,
+          {borderColor: theme?.borderTertiary},
+          bgImageStyles,
+        ]}>
         <LinearGradient
           start={{x: 0.5, y: 0}}
           end={{x: 0.5, y: 1}}
@@ -183,6 +189,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     overflow: 'hidden',
     marginRight: 16,
+    borderWidth: 1,
   },
   container: {
     flex: 1,
