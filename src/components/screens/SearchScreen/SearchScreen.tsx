@@ -1,36 +1,36 @@
 import {Dimensions, FlatList, StyleSheet, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
-import {ActivityIndicator, Button, Searchbar} from 'react-native-paper';
+import {
+  ActivityIndicator,
+  Button,
+  Divider,
+  Searchbar,
+} from 'react-native-paper';
 
 import copies from 'src/constants/copies';
 import {useAppSelector} from 'src/hooks/reduxHooks';
 import {CLOSE} from 'src/constants/icons';
 import containers from 'src/styles/containers';
 import {SEARCH_TYPES} from 'src/constants/search';
-import RestaurantCarouselCard from 'src/components/organisms/RestaurantCarouselCard/RestaurantCarouselCard';
-import Separator from 'src/components/atoms/Separator';
-import useGetRestaurantsDummy from 'src/hooks/useGetRestuarantsDummy';
 import EmptySearch from './EmptySearch';
 import type {TSearchType} from 'src/types/global';
-import type {IRestaurant} from 'src/types/ordering';
+import type {IProduct} from 'src/types/ordering';
+import useSearch from 'src/hooks/useSearch';
+import RestaurantMenuItem from 'src/components/organisms/RestaurantMenuItem/RestaurantMenuItem';
 
 const {width: WINDOW_WIDTH} = Dimensions.get('window');
 const imageWidth = WINDOW_WIDTH - 32;
 
 const {SEARCH, CATEGORIES, RESTAURANTS} = copies;
 
-const renderItem = ({item}: {item: IRestaurant}) => (
-  <RestaurantCarouselCard
-    restaurant={item}
-    showFavouriteIcon
-    bgImageStyles={styles.restaurantCardContainer}
-  />
+const renderItem = ({item}: {item: IProduct}) => (
+  <RestaurantMenuItem product={item} showCategory showRestaurant />
 );
 
-const keyExtractor = (item: IRestaurant) => item.id;
+const keyExtractor = (item: IProduct) => item.id;
 
-const renderSeparator = () => <Separator />;
+const renderSeparator = () => <Divider style={styles.divier} />;
 
 const SearchScreen = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -38,14 +38,12 @@ const SearchScreen = () => {
     SEARCH_TYPES.RESTAURANTS,
   );
   const theme = useAppSelector(state => state.themeReducer.theme);
-  const {loading, restaurants, getMoreRestaurants, getRestaurants} =
-    useGetRestaurantsDummy();
+  const {response, debouncedSearch, loading} = useSearch();
 
-  const onEndReached = () => {
-    if (searchQuery) {
-      getMoreRestaurants();
-    }
-  };
+  useEffect(() => {
+    debouncedSearch({searchQuery, searchType});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedSearch, searchType]);
 
   const onPressRestaurants = () => {
     setSearchType(SEARCH_TYPES.RESTAURANTS);
@@ -57,8 +55,13 @@ const SearchScreen = () => {
 
   const onSubmitEditing = () => {
     if (searchQuery) {
-      getRestaurants();
+      debouncedSearch({searchQuery, searchType});
     }
+  };
+
+  const onClearIconPress = () => {
+    setSearchQuery('');
+    debouncedSearch({searchQuery: '', searchType, ignoreSearchQuery: true});
   };
 
   return (
@@ -72,6 +75,7 @@ const SearchScreen = () => {
           autoFocus
           onSubmitEditing={onSubmitEditing}
           clearIcon={CLOSE}
+          onClearIconPress={onClearIconPress}
         />
       </View>
       <View style={styles.buttonsContainer}>
@@ -110,7 +114,7 @@ const SearchScreen = () => {
         </Button>
       </View>
       <FlatList
-        data={restaurants}
+        data={response}
         renderItem={renderItem}
         contentContainerStyle={styles.listContainer}
         keyExtractor={keyExtractor}
@@ -122,7 +126,6 @@ const SearchScreen = () => {
             </View>
           ) : null
         }
-        onEndReached={onEndReached}
         ListEmptyComponent={!loading ? <EmptySearch /> : null}
         style={styles.list}
       />
@@ -165,5 +168,8 @@ const styles = StyleSheet.create({
   restaurantCardContainer: {
     marginHorizontal: 16,
     width: imageWidth,
+  },
+  divier: {
+    marginVertical: 8,
   },
 });

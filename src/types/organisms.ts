@@ -8,7 +8,6 @@ interface RestaurantInCartProps {
 
 interface IQuantitySelectorProps {
   product: IProduct;
-  restaurant: IRestaurant;
 }
 
 interface IRestaurantProps {

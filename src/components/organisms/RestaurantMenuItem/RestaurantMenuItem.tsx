@@ -16,9 +16,10 @@ const {TODAY, SOLD_OUT, NOTIFY_ME} = copies;
 
 interface IRestaurantMenuItemProps {
   product: IProduct;
-  restaurant: IRestaurant;
+  restaurant?: IRestaurant;
   showTimings?: boolean;
   showCategory?: boolean;
+  showRestaurant?: boolean;
 }
 
 const RestaurantMenuItem: React.FC<IRestaurantMenuItemProps> = ({
@@ -26,10 +27,12 @@ const RestaurantMenuItem: React.FC<IRestaurantMenuItemProps> = ({
   restaurant,
   showTimings = true,
   showCategory = false,
+  showRestaurant = false,
 }) => {
   const theme = useAppSelector(state => state.themeReducer.theme);
-  const {image_url, name, price, category, is_available} = product;
-  const {openingHours} = restaurant;
+  const {image_url, name, price, category, is_available, restaurant_name} =
+    product;
+  const {openingHours = ''} = restaurant ? restaurant : {};
   const timings = `${TODAY}, ${openingHours}`;
 
   return (
@@ -46,10 +49,17 @@ const RestaurantMenuItem: React.FC<IRestaurantMenuItemProps> = ({
             {category}
           </Text>
         ) : null}
+        {showRestaurant && restaurant_name ? (
+          <Text
+            variant="bodySmall"
+            style={[styles.restaurantName, {color: theme?.textHigh}]}>
+            {restaurant_name}
+          </Text>
+        ) : null}
         <Text variant="bodyMedium" style={styles.price}>
           {getFormattedPrice(price)}
         </Text>
-        {showTimings ? (
+        {showTimings && openingHours ? (
           <Text variant="bodySmall" style={styles.timings}>
             {timings}
           </Text>
@@ -64,7 +74,7 @@ const RestaurantMenuItem: React.FC<IRestaurantMenuItemProps> = ({
       </View>
       <View style={styles.rightContainer}>
         {is_available ? (
-          <QuantitySelector product={product} restaurant={restaurant} />
+          <QuantitySelector product={product} />
         ) : (
           <Button
             mode="outlined"
@@ -131,5 +141,9 @@ const styles = StyleSheet.create({
   category: {
     ...font.regular,
     fontSize: 12,
+  },
+  restaurantName: {
+    ...font.bold,
+    fontSize: 10,
   },
 });
