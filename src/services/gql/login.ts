@@ -7,6 +7,7 @@ const USER_LOGIN = gql`
       statusCode
       token
       user {
+        id
         account_status
         address
         email
