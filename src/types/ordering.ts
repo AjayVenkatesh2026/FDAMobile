@@ -165,6 +165,20 @@ interface IRestaurantResponse {
   name: string;
 }
 
+interface IOrderInput {
+  admin_commission: number;
+  delivery_address: string;
+  order_completed_at?: TDateISO;
+  order_items: IOrderProduct[];
+  order_placed_at?: TDateISO;
+  order_status?: string;
+  restaurant_id: string;
+  total_amount: number;
+  type?: string;
+  user_id: string;
+  vendor_earnings: number;
+}
+
 export type {
   IProfile,
   IAddress,
@@ -182,4 +196,5 @@ export type {
   TMysteryBag,
   IRestaurantResponse,
   IOrderResponse,
+  IOrderInput,
 };

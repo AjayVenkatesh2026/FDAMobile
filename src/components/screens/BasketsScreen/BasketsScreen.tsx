@@ -1,7 +1,7 @@
 import {ScrollView, StyleSheet, View} from 'react-native';
 import React, {useState} from 'react';
 
-import {Button, Text} from 'react-native-paper';
+import {ActivityIndicator, Button, Text} from 'react-native-paper';
 import {isEmpty} from 'radash';
 import {useNavigation} from '@react-navigation/native';
 import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
@@ -17,6 +17,8 @@ import MyBasket from './MyBasket';
 import PaymentBreakdown from './PaymentBreakdown';
 import PaymentMethods from 'src/components/organisms/PaymentMethods/PaymentMethods';
 import type {RootStackParamList} from 'src/types/navigator';
+import usePlaceOrder from 'src/hooks/usePlaceOrder';
+import {IOrderResponse} from 'src/types/ordering';
 
 const {CHECKOUT, DELIVERY, PICKUP, EMPTY_BASKET} = copies;
 
@@ -31,6 +33,24 @@ const BasketsScreen = () => {
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const cartRestaurant = getCartRestaurant(cart, restaurants);
 
+  const onCompleted = (data: IOrderResponse) => {
+    // TODO: remove hard coded order id 18ea888b-8fad-40ed-9f3b-d7c86902900a
+    const {id = '18ea888b-8fad-40ed-9f3b-d7c86902900a'} = data;
+
+    navigation.navigate('OrderStack', {
+      screen: 'OrderSuccess',
+      params: {
+        orderId: id,
+        isPickup,
+      },
+    });
+  };
+
+  const {placeOrder, loading} = usePlaceOrder({
+    restaurantId: cartRestaurant?.id,
+    onCompleted,
+  });
+
   const onPressDelivery = () => {
     setIsPickup(false);
   };
@@ -40,13 +60,7 @@ const BasketsScreen = () => {
   };
 
   const onPressCheckout = () => {
-    navigation.navigate('OrderStack', {
-      screen: 'OrderSuccess',
-      params: {
-        orderId: '',
-        isPickup,
-      },
-    });
+    placeOrder();
   };
 
   return (
@@ -61,7 +75,11 @@ const BasketsScreen = () => {
           <Text variant="titleMedium">{CHECKOUT}</Text>
         </View>
       </Header>
-      {isEmpty(cartRestaurant) || cartRestaurant === undefined ? (
+      {loading ? (
+        <View style={styles.loaderContainer}>
+          <ActivityIndicator size={'large'} color={theme?.primaryDark} />
+        </View>
+      ) : isEmpty(cartRestaurant) || cartRestaurant === undefined ? (
         <View style={styles.emptyContainer}>
           <Text variant="bodyMedium" style={{color: theme?.textMid}}>
             {EMPTY_BASKET}
@@ -155,6 +173,10 @@ const styles = StyleSheet.create({
   },
   checkoutButton: {
     borderRadius: 8,
+  },
+  loaderContainer: {
+    ...containers.rowCenterCenter,
+    flex: 1,
   },
 });
 
