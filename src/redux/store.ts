@@ -5,6 +5,7 @@ import profileReducer from './slices/profileSlice';
 import restaurantsReducer from './slices/restaurantSlice';
 import cartReducer from './slices/cartSlice';
 import categoriesReducer from './slices/categoriesSlice';
+import menuItemsReducer from './slices/menuItemsSlice';
 
 const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ const store = configureStore({
     restaurantsReducer,
     cartReducer,
     categoriesReducer,
+    menuItemsReducer,
   },
 });
 

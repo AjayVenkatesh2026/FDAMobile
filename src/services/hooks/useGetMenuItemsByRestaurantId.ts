@@ -4,7 +4,7 @@ import {isEmpty} from 'radash';
 
 import type {IProduct} from 'src/types/ordering';
 import {handleGqlError} from 'src/utils/services';
-import {GET_MENU_ITEMS} from '../gql/menuItems';
+import {GET_MENU_ITEMS_BY_RESTAURANT_ID} from '../gql/menuItems';
 import {useCallback, useState} from 'react';
 
 interface IMenuItemsResponse {
@@ -40,11 +40,14 @@ const useGetMenuItemsByRestaurantId = ({
     handleGqlError({location: 'useGetMenuItemsByRestaurantId', error: err});
   };
 
-  const [getMenuItemsGQL, {loading}] = useLazyQuery(GET_MENU_ITEMS, {
-    onCompleted: onGetMenuItems,
-    onError,
-    fetchPolicy: 'no-cache',
-  });
+  const [getMenuItemsGQL, {loading}] = useLazyQuery(
+    GET_MENU_ITEMS_BY_RESTAURANT_ID,
+    {
+      onCompleted: onGetMenuItems,
+      onError,
+      fetchPolicy: 'no-cache',
+    },
+  );
 
   const getMenuItems = useCallback(
     ({restaurantId = ''}) => {
