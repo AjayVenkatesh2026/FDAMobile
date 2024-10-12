@@ -10,7 +10,6 @@ import {getThemedStyles} from 'src/utils/theme';
 import type {THeaderProps} from 'src/types/global';
 import CartButton from './CartButton';
 
-// TODO: Add Cart icon button for trailing icon
 const Header = ({
   leadingIcon,
   trailingIcon,

@@ -1,11 +1,4 @@
-import {
-  Dimensions,
-  FlatList,
-  StyleSheet,
-  View,
-  type NativeSyntheticEvent,
-  type TextInputSubmitEditingEventData,
-} from 'react-native';
+import {Dimensions, FlatList, StyleSheet, View} from 'react-native';
 import React, {useState} from 'react';
 
 import {ActivityIndicator, Button, Searchbar} from 'react-native-paper';
@@ -62,11 +55,7 @@ const SearchScreen = () => {
     setSearchType(SEARCH_TYPES.CATEGORIES);
   };
 
-  const onSubmitEditing = (
-    e: NativeSyntheticEvent<TextInputSubmitEditingEventData>,
-  ) => {
-    // TODO: remove console.log
-    console.log(e.nativeEvent.text);
+  const onSubmitEditing = () => {
     if (searchQuery) {
       getRestaurants();
     }
