@@ -18,6 +18,7 @@ interface IDistributionDetailsProps {
 
 const {TO} = copies;
 
+// TODO: make these dynamic / get from api
 const expectedStartTime = '3:00 pm';
 const expectedEndTime = '3:30 pm';
 const ICON_SIZE = 18;
