@@ -8,7 +8,8 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "postinstall": "yarn patch-package"
+    "postinstall": "yarn patch-package",
+    "generateApk": "cd android && ./gradlew clean && ./gradlew assembleRelease && open app/build/outputs/apk/release && cd .."
   },
   "dependencies": {
     "@apollo/client": "^3.11.8",
