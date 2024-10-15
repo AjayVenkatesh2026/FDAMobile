@@ -23,9 +23,13 @@ const OnboardingScreen = () => {
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   useEffect(() => {
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       set(keys.HAS_SEEN_ONBOARDING, true);
     }, 1000);
+
+    return () => {
+      clearTimeout(timeout);
+    };
   }, []);
 
   const onPressNext = () => {
