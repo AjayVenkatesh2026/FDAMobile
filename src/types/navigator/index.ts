@@ -44,6 +44,7 @@ type OrderStackParamList = {
   OrderTrackingScreen: {
     orderId?: string;
     orderData?: IOrder;
+    goBackToHome?: boolean;
   };
   OrderHistory: undefined;
 };

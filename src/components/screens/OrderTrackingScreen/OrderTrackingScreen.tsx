@@ -2,7 +2,12 @@ import {Image, StyleSheet, View} from 'react-native';
 import React, {useLayoutEffect, useState} from 'react';
 
 import {ActivityIndicator, Card, Divider, Icon, Text} from 'react-native-paper';
-import {type RouteProp, useRoute} from '@react-navigation/native';
+import {
+  type RouteProp,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
+import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 import Header from 'src/components/molecules/Header';
 import type {OrderStackParamList} from 'src/types/navigator';
@@ -22,9 +27,10 @@ import {useAppSelector} from 'src/hooks/reduxHooks';
 import dummyMap from 'src/assets/dummy/maps/dummy-map-tracking.png';
 import dummyProfile from 'src/assets/dummy/delivery-partner/delivery-partner.png';
 import copies from 'src/constants/copies';
-import {IOrderResponse} from 'src/types/ordering';
 import useGetOrder from 'src/services/hooks/useGetOrder';
 import {isEmpty} from 'radash';
+import type {IOrderResponse} from 'src/types/ordering';
+import type {RootStackParamList} from 'src/types/navigator';
 
 const {ORDER_NO} = copies;
 const ICON_SIZE = 20;
@@ -46,8 +52,10 @@ const DELIVERY_PARTNER = {
 
 const OrderTrackingScreen = () => {
   const {
-    params: {orderId, orderData},
+    params: {orderId, orderData, goBackToHome = false},
   } = useRoute<RouteProp<OrderStackParamList, 'OrderTrackingScreen'>>();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const theme = useAppSelector(state => state.themeReducer.theme);
   const restaurants = useAppSelector(
     state => state.restaurantsReducer.restaurants,
@@ -76,10 +84,26 @@ const OrderTrackingScreen = () => {
     );
   }
 
+  const onPressBack = () => {
+    if (goBackToHome) {
+      navigation.navigate('BottomTab', {
+        screen: 'HomeScreen',
+      });
+    } else {
+      navigation.goBack();
+    }
+  };
+
   if (!order) {
     return null;
   }
-  const {total_amount, order_status, delivery_address, restaurant_id} = order;
+  const {
+    total_amount,
+    order_status,
+    delivery_address,
+    restaurant_id,
+    id = '',
+  } = order;
   const restaurant = restaurants.find(res => res.id === restaurant_id);
   const {address = ''} = restaurant || {};
 
@@ -87,11 +111,12 @@ const OrderTrackingScreen = () => {
     <View style={styles.container}>
       <Header
         showBack
+        onPressBack={onPressBack}
         trailingIcon={MENU_DOTS}
         containerStyles={styles.headerContainer}>
         <Text
           variant="titleMedium"
-          style={styles.headerTitle}>{`${ORDER_NO} ${orderId}`}</Text>
+          style={styles.headerTitle}>{`${ORDER_NO} ${id}`}</Text>
       </Header>
       <Image source={dummyMap} style={styles.mapImage} />
       <Card

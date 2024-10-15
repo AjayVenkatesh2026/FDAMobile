@@ -40,6 +40,7 @@ const OrderSuccessScreen = () => {
       screen: 'OrderTrackingScreen',
       params: {
         orderId,
+        goBackToHome: true,
       },
     });
   };

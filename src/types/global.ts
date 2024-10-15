@@ -51,6 +51,7 @@ type THeaderProps = {
   showBack?: boolean;
   leadingIconColor?: string;
   showCart?: boolean;
+  onPressBack?: () => void;
 };
 
 interface FDAImage extends ImageProps {
