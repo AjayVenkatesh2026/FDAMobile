@@ -157,7 +157,7 @@ const dummyOrders: IOrder[] = [
 const DUMMY_BILL_BREAKDOWN = {
   DELIVERY_CHARGE: 25,
   PLATFORM_FEE: 6,
-  TAX: 10,
+  TAX: 0,
   PICKUP_DISCOUNT: 49,
 };
 

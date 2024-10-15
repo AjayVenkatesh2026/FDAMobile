@@ -10,7 +10,14 @@ import KeyValue from 'src/components/atoms/KeyValue';
 import {getFormattedPrice} from 'src/utils/helpers';
 import useGetCartDataPerRestaurant from 'src/hooks/useGetCartDataPerRestaurant';
 
-const {PAYMENT, ITEM_TOTAL, DELIVERY_FEE, PICKUP_DISCOUNT, TO_PAY} = copies;
+const {
+  PAYMENT,
+  ITEM_TOTAL,
+  DELIVERY_FEE,
+  PICKUP_DISCOUNT,
+  TO_PAY,
+  PLATFORM_FEE,
+} = copies;
 
 interface IPaymentBreakdownProps {
   restaurantId: string;
@@ -24,10 +31,11 @@ const PaymentBreakdown: React.FC<IPaymentBreakdownProps> = ({
   const theme = useAppSelector(state => state.themeReducer.theme);
   const {
     cartData: {
-      orderData: {itemTotal, deliveryFee, pickupDiscount},
+      orderData: {itemTotal, deliveryFee, pickupDiscount, platformFee},
     },
   } = useGetCartDataPerRestaurant({restaurantId});
-  const grandTotal = itemTotal + (isPickup ? -pickupDiscount : deliveryFee);
+  const grandTotal =
+    itemTotal + (isPickup ? -pickupDiscount : deliveryFee) + platformFee;
 
   return (
     <View style={styles.container}>
@@ -57,6 +65,12 @@ const PaymentBreakdown: React.FC<IPaymentBreakdownProps> = ({
           valueStyles={[styles.valueStyles, {color: theme?.textHigh}]}
         />
       )}
+      <KeyValue
+        name={PLATFORM_FEE}
+        value={getFormattedPrice(platformFee)}
+        keyStyles={[styles.keyStyles, {color: theme?.textMid}]}
+        valueStyles={[styles.valueStyles, {color: theme?.textHigh}]}
+      />
       <Divider
         style={[styles.divider, {backgroundColor: theme?.borderPrimary}]}
       />
