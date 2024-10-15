@@ -22,18 +22,23 @@ const Header = ({
   showBack = false,
   showCart = false,
   leadingIconColor,
+  onPressBack,
 }: PropsWithChildren<THeaderProps>) => {
   const navigation = useNavigation();
   const theme = useAppSelector(state => state.themeReducer.theme);
 
-  const onPressBack = () => {
-    navigation.goBack();
+  const onPressBackIcon = () => {
+    if (onPressBack) {
+      onPressBack();
+    } else {
+      navigation.goBack();
+    }
   };
 
   return (
     <Appbar.Header style={[containerStyles]}>
       {showBack ? (
-        <Appbar.BackAction onPress={onPressBack} color={leadingIconColor} />
+        <Appbar.BackAction onPress={onPressBackIcon} color={leadingIconColor} />
       ) : null}
       {leadingIcon ? (
         <Appbar.Action
