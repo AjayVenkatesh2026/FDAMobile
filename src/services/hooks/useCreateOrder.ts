@@ -18,7 +18,6 @@ interface ICreateOrderResponse {
 
 const useCreateOrder = ({onCompleted}: {onCompleted?: Function}) => {
   const onGetOrder = (data: ICreateOrderResponse) => {
-    console.log('data', JSON.stringify(data));
     const {response: {orders = []} = {}} = data;
     if (!isEmpty(orders)) {
       if (onCompleted) {

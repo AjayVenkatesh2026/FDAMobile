@@ -1,5 +1,5 @@
 import {StyleSheet, View, FlatList} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useLayoutEffect} from 'react';
 
 import {ActivityIndicator, Text} from 'react-native-paper';
 
@@ -25,7 +25,7 @@ const OrderHistoryScreen = () => {
   const theme = useAppSelector(state => state.themeReducer.theme);
   const {loading, orders, getOrders} = useGetOrders();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     getOrders();
   }, [getOrders]);
 
