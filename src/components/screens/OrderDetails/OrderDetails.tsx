@@ -11,7 +11,6 @@ import font from 'src/styles/font';
 import {getThemedStyles} from 'src/utils/theme';
 import copies from 'src/constants/copies';
 import Heading from 'src/components/atoms/Heading';
-import {getMergedAddress} from 'src/utils/helpers';
 import ProductItem from 'src/components/molecules/OrderDetails/ProductItem';
 import BillBreakdown from '../../molecules/OrderDetails/BillBreakdown';
 import type {OrderStackParamList} from 'src/types/navigator';
