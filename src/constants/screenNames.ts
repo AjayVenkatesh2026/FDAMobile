@@ -43,6 +43,7 @@ const orderStackScreenNames: {
   OrderDetails: 'OrderDetails',
   OrderSuccess: 'OrderSuccess',
   OrderTrackingScreen: 'OrderTrackingScreen',
+  OrderHistory: 'OrderHistory',
 };
 
 const screenNames = {

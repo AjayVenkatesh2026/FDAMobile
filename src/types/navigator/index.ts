@@ -44,6 +44,7 @@ type OrderStackParamList = {
   OrderTrackingScreen: {
     orderId: string;
   };
+  OrderHistory: undefined;
 };
 
 type RootStackParamList = {
@@ -82,7 +83,8 @@ type OrderStackScreens =
   | 'CartHomeScreen'
   | 'OrderDetails'
   | 'OrderSuccess'
-  | 'OrderTrackingScreen';
+  | 'OrderTrackingScreen'
+  | 'OrderHistory';
 
 interface ITab {
   name: BottomTabScreens;

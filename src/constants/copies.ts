@@ -128,6 +128,7 @@ const copies = {
   SORRY_THERE_ARE_NO_ITEMS_FOR_THIS_RESTAURANT:
     'Sorry! There are no items for this restuarant!',
   DISHES: 'Dishes',
+  YOUR_ORDERS: 'Your Orders',
 };
 
 export default copies;

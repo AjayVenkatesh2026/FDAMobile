@@ -26,10 +26,10 @@ const useGetOrders = () => {
           const newOrders = prevOrders.slice(0, 3).map((res, idx) => ({
             ...res,
             id: `${prevOrders.length + idx + 1}`,
-            restaurant: {
-              ...res.restaurant,
-              name: `Restaurant ${prevOrders.length + idx + 1}`,
-            },
+            // restaurant: {
+            //   ...res.restaurant,
+            //   name: `Restaurant ${prevOrders.length + idx + 1}`,
+            // },
           }));
 
           return [...prevOrders, ...newOrders];

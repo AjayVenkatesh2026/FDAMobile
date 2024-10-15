@@ -19,8 +19,21 @@ const {ORDER_PLACED_ON} = copies;
 
 const OrderCard = ({order}: {order: IOrder}) => {
   const theme = useAppSelector(state => state.themeReducer.theme);
-  const {delivered_at, order_status, order_total, products, restaurant} = order;
-  const {image, address, name} = restaurant;
+  const restaurants = useAppSelector(
+    state => state.restaurantsReducer.restaurants,
+  );
+  const {
+    order_placed_at,
+    order_status,
+    total_amount,
+    order_items,
+    restaurant_id,
+  } = order;
+  const {
+    image = '',
+    address = '',
+    name = '',
+  } = restaurants.find(res => res.id === restaurant_id) || {};
   const onPressCard = () => {};
 
   return (
@@ -29,7 +42,7 @@ const OrderCard = ({order}: {order: IOrder}) => {
       style={getThemedStyles({backgroundColor: theme?.surface})}>
       <RestaurantDetailsCard image={image} name={name} description={address} />
       <View style={styles.middleContainer}>
-        <ProductsQuantities items={products} />
+        <ProductsQuantities items={order_items} />
         <Divider
           style={getThemedStyles({backgroundColor: theme?.borderSecondary})}
         />
@@ -39,7 +52,7 @@ const OrderCard = ({order}: {order: IOrder}) => {
           <Text
             variant={'bodySmall'}
             style={font.regular}>{`${ORDER_PLACED_ON} ${format(
-            delivered_at,
+            order_placed_at,
             ddLLLhhmmbb,
           )}`}</Text>
           <Text variant={'bodySmall'} style={styles.orderStatus}>
@@ -47,7 +60,7 @@ const OrderCard = ({order}: {order: IOrder}) => {
           </Text>
         </View>
         <Text variant={'titleSmall'} style={font.semiBold}>
-          {getFormattedPrice(order_total)}
+          {getFormattedPrice(total_amount)}
         </Text>
       </View>
     </Card>

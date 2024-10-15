@@ -48,16 +48,6 @@ interface IProduct {
   category_id: string;
 }
 
-interface IOrderRestaurant {
-  id: string;
-  image: string;
-  name: string;
-  address: string;
-  distance?: string;
-  duration?: number;
-  rating?: number;
-}
-
 interface IOrderProduct {
   id: string;
   name: string;
@@ -65,12 +55,7 @@ interface IOrderProduct {
   quantity: number;
 }
 
-interface IOrderPayment {
-  id: string;
-  payment_method: string;
-}
-
-type OrderStatus = 'Pending' | 'Cancelled' | 'In Progress' | 'Delivered';
+type OrderStatus = 'PENDING' | 'ONGOING' | 'COMPLETED';
 
 interface ICartProduct {
   details: IProduct;
@@ -93,14 +78,16 @@ interface ICartData {
 
 interface IOrder {
   id: string;
+  user_id: string;
+  restaurant_id: string;
+  order_items: IOrderProduct[];
+  delivery_address: string;
+  total_amount: number;
+  vendor_earnings: number;
+  admin_commission: number;
   order_status: OrderStatus;
-  order_total: number;
-  delivered_at: TDateISO;
-  taxes: number;
-  delivery_fee: number;
-  restaurant: IOrderRestaurant;
-  products: IOrderProduct[];
-  payment: IOrderPayment;
+  order_placed_at: TDateISO;
+  order_completed_at: TDateISO;
 }
 
 interface IBanner {

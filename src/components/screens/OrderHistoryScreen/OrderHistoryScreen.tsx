@@ -36,6 +36,7 @@ const OrderHistoryScreen = () => {
   return (
     <View style={styles.container}>
       <Header
+        showBack
         containerStyles={[
           styles.headerContainer,
           getThemedStyles({backgroundColor: theme?.highlight}),

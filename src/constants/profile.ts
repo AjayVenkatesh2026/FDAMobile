@@ -12,6 +12,7 @@ import {
   FREQUENTLY_ASKED_QUESTIONS,
   LOCATION_EXIT,
   FORMAT_LIST_BULLETED,
+  HISTORY,
 } from './icons';
 import copies from './copies';
 import {clearAll} from 'src/storage';
@@ -32,6 +33,7 @@ const {
   USER_PROFILE,
   COMMUNITY,
   SUPPORT,
+  YOUR_ORDERS,
 } = copies;
 
 const options: TProfileOption[] = [
@@ -46,6 +48,20 @@ const options: TProfileOption[] = [
     icon: ACCOUNT,
     name: ACCOUNT_DETAILS,
     onClick: ({}) => {},
+    trailingIcon: CHEVRON_RIGHT,
+  },
+  {
+    id: 'your-orders',
+    type: 'Option',
+    icon: HISTORY,
+    name: YOUR_ORDERS,
+    onClick: ({navigation}) => {
+      if (navigation) {
+        navigation.navigate('OrderStack', {
+          screen: 'OrderHistory',
+        });
+      }
+    },
     trailingIcon: CHEVRON_RIGHT,
   },
   {
