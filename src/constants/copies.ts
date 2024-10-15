@@ -127,6 +127,7 @@ const copies = {
   EMPTY_RESULTS: 'Empty Results !',
   SORRY_THERE_ARE_NO_ITEMS_FOR_THIS_RESTAURANT:
     'Sorry! There are no items for this restuarant!',
+  DISHES: 'Dishes',
 };
 
 export default copies;

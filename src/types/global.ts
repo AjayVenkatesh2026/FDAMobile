@@ -57,7 +57,7 @@ interface FDAImage extends ImageProps {
   url?: string;
 }
 
-type TSearchType = 'RESTAURANTS' | 'CATEGORIES';
+type TSearchType = 'RESTAURANTS' | 'CATEGORIES' | 'MENU_ITEMS';
 
 interface IJwtPaylod extends JwtPayload {
   id?: string;

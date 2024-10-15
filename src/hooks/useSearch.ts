@@ -23,11 +23,13 @@ const useSearch = () => {
       ignoreSearchQuery?: boolean;
     }) => {
       setLoading(false);
-      let field: 'restaurant_name' | 'category' | '' = '';
+      let field: 'restaurant_name' | 'category' | 'name' | '' = '';
       if (searchType === SEARCH_TYPES.RESTAURANTS) {
         field = 'restaurant_name';
       } else if (searchType === SEARCH_TYPES.CATEGORIES) {
         field = 'category';
+      } else if (searchType === SEARCH_TYPES.MENU_ITEMS) {
+        field = 'name';
       }
       if (field && (searchQuery || ignoreSearchQuery)) {
         const res = menuItems.filter(menuItem =>

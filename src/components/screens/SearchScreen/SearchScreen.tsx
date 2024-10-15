@@ -22,7 +22,7 @@ import RestaurantMenuItem from 'src/components/organisms/RestaurantMenuItem/Rest
 const {width: WINDOW_WIDTH} = Dimensions.get('window');
 const imageWidth = WINDOW_WIDTH - 32;
 
-const {SEARCH, CATEGORIES, RESTAURANTS} = copies;
+const {SEARCH, CATEGORIES, RESTAURANTS, DISHES} = copies;
 
 const renderItem = ({item}: {item: IProduct}) => (
   <RestaurantMenuItem product={item} showCategory showRestaurant />
@@ -35,7 +35,7 @@ const renderSeparator = () => <Divider style={styles.divier} />;
 const SearchScreen = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [searchType, setSearchType] = useState<TSearchType>(
-    SEARCH_TYPES.RESTAURANTS,
+    SEARCH_TYPES.MENU_ITEMS,
   );
   const theme = useAppSelector(state => state.themeReducer.theme);
   const {response, debouncedSearch, loading} = useSearch();
@@ -44,6 +44,10 @@ const SearchScreen = () => {
     debouncedSearch({searchQuery, searchType});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedSearch, searchType]);
+
+  const onPressMenuItems = () => {
+    setSearchType(SEARCH_TYPES.MENU_ITEMS);
+  };
 
   const onPressRestaurants = () => {
     setSearchType(SEARCH_TYPES.RESTAURANTS);
@@ -81,6 +85,24 @@ const SearchScreen = () => {
       <View style={styles.buttonsContainer}>
         <Button
           mode="outlined"
+          onPress={onPressMenuItems}
+          style={[styles.button, {borderColor: theme?.primaryDefault}]}
+          textColor={
+            searchType === SEARCH_TYPES.MENU_ITEMS
+              ? theme?.surface
+              : theme?.primaryDefault
+          }
+          labelStyle={styles.buttonLabel}
+          buttonColor={
+            searchType === SEARCH_TYPES.MENU_ITEMS
+              ? theme?.primaryDefault
+              : theme?.surface
+          }>
+          {DISHES}
+        </Button>
+        <View style={styles.separator} />
+        <Button
+          mode="outlined"
           onPress={onPressRestaurants}
           style={[styles.button, {borderColor: theme?.primaryDefault}]}
           textColor={
@@ -88,6 +110,7 @@ const SearchScreen = () => {
               ? theme?.surface
               : theme?.primaryDefault
           }
+          labelStyle={styles.buttonLabel}
           buttonColor={
             searchType === SEARCH_TYPES.RESTAURANTS
               ? theme?.primaryDefault
@@ -109,6 +132,7 @@ const SearchScreen = () => {
               ? theme?.primaryDefault
               : theme?.surface
           }
+          labelStyle={styles.buttonLabel}
           style={[styles.button, {borderColor: theme?.primaryDefault}]}>
           {CATEGORIES}
         </Button>
@@ -171,5 +195,8 @@ const styles = StyleSheet.create({
   },
   divier: {
     marginVertical: 8,
+  },
+  buttonLabel: {
+    marginHorizontal: 0,
   },
 });
