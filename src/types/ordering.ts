@@ -127,7 +127,7 @@ interface IOrderResponse {
     price: number;
     quantity: number;
     id: string;
-  };
+  }[];
   delivery_address: string;
   total_amount: number;
   vendor_earnings: number;

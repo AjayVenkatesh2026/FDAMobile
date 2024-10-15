@@ -24,6 +24,7 @@ import dummyProfile from 'src/assets/dummy/delivery-partner/delivery-partner.png
 import copies from 'src/constants/copies';
 import {IOrderResponse} from 'src/types/ordering';
 import useGetOrder from 'src/services/hooks/useGetOrder';
+import {isEmpty} from 'radash';
 
 const {ORDER_NO} = copies;
 const ICON_SIZE = 20;
@@ -45,13 +46,15 @@ const DELIVERY_PARTNER = {
 
 const OrderTrackingScreen = () => {
   const {
-    params: {orderId},
+    params: {orderId, orderData},
   } = useRoute<RouteProp<OrderStackParamList, 'OrderTrackingScreen'>>();
   const theme = useAppSelector(state => state.themeReducer.theme);
   const restaurants = useAppSelector(
     state => state.restaurantsReducer.restaurants,
   );
-  const [order, setOrder] = useState<IOrderResponse>();
+  const [order, setOrder] = useState<IOrderResponse | null>(
+    orderData ? orderData : null,
+  );
 
   const onCompleted = (orderDetails: IOrderResponse) => {
     setOrder(orderDetails);
@@ -60,10 +63,10 @@ const OrderTrackingScreen = () => {
   const {getOrderById, loading} = useGetOrder({onCompleted});
 
   useLayoutEffect(() => {
-    if (orderId) {
+    if (orderId && isEmpty(orderData)) {
       getOrderById({orderId});
     }
-  }, [getOrderById, orderId]);
+  }, [getOrderById, orderData, orderId]);
 
   if (loading) {
     return (

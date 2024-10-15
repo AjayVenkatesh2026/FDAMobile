@@ -1,5 +1,5 @@
 import type {NavigatorScreenParams} from '@react-navigation/native';
-import {ICategory, IRestaurant} from '../ordering';
+import {ICategory, IOrder, IRestaurant} from '../ordering';
 
 type BottomTabOption = {
   icon: string;
@@ -42,7 +42,8 @@ type OrderStackParamList = {
     isPickup: boolean;
   };
   OrderTrackingScreen: {
-    orderId: string;
+    orderId?: string;
+    orderData?: IOrder;
   };
   OrderHistory: undefined;
 };

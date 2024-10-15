@@ -1,8 +1,10 @@
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, ToastAndroid, View} from 'react-native';
 import React from 'react';
 
 import {Card, Divider, Text} from 'react-native-paper';
 import {format} from 'date-fns';
+import {useNavigation} from '@react-navigation/native';
+import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 import type {IOrder} from 'src/types/ordering';
 import {useAppSelector} from 'src/hooks/reduxHooks';
@@ -14,6 +16,7 @@ import copies from 'src/constants/copies';
 import {getFormattedPrice} from 'src/utils/helpers';
 import RestaurantDetailsCard from '../molecules/RestaurantDetailsCard';
 import ProductsQuantities from '../molecules/ProductsQuantities';
+import type {RootStackParamList} from 'src/types/navigator';
 
 const {ORDER_PLACED_ON} = copies;
 
@@ -22,6 +25,8 @@ const OrderCard = ({order}: {order: IOrder}) => {
   const restaurants = useAppSelector(
     state => state.restaurantsReducer.restaurants,
   );
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const {
     order_placed_at,
     order_status,
@@ -34,7 +39,18 @@ const OrderCard = ({order}: {order: IOrder}) => {
     address = '',
     name = '',
   } = restaurants.find(res => res.id === restaurant_id) || {};
-  const onPressCard = () => {};
+  const onPressCard = () => {
+    if (order_status !== 'COMPLETED') {
+      navigation.navigate('OrderStack', {
+        screen: 'OrderTrackingScreen',
+        params: {
+          orderData: order,
+        },
+      });
+    } else {
+      ToastAndroid.show('Order Completd!', 500);
+    }
+  };
 
   return (
     <Card

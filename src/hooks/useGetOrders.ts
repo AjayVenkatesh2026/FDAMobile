@@ -1,51 +1,35 @@
-import {useCallback, useState} from 'react';
+import {ApolloError, useLazyQuery} from '@apollo/client';
+import {isEmpty} from 'radash';
+import {useState} from 'react';
 
-import {dummyOrders} from 'src/constants/dummyData';
+import {GET_ORDERS} from 'src/services/gql/order';
 import type {IOrder} from 'src/types/ordering';
+import {handleGqlError} from 'src/utils/services';
+import type {IGetOrdersResponse} from 'src/types/apis';
 
 const useGetOrders = () => {
   const [orders, setOrders] = useState<IOrder[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
 
-  const getOrders = useCallback(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setOrders(dummyOrders);
-      setLoading(false);
-    }, 2000);
-  }, []);
-
-  const getMoreOrders = useCallback(() => {
-    if (orders.length >= 10) {
-      return;
+  const onGetOrders = (data: IGetOrdersResponse) => {
+    const {response: {orders: ordersResponse = []} = {}} = data;
+    if (!isEmpty(ordersResponse)) {
+      setOrders(ordersResponse);
     }
-    setLoading(true);
-    setTimeout(() => {
-      setOrders((prevOrders = []) => {
-        if (prevOrders.length < 10) {
-          const newOrders = prevOrders.slice(0, 3).map((res, idx) => ({
-            ...res,
-            id: `${prevOrders.length + idx + 1}`,
-            // restaurant: {
-            //   ...res.restaurant,
-            //   name: `Restaurant ${prevOrders.length + idx + 1}`,
-            // },
-          }));
+  };
 
-          return [...prevOrders, ...newOrders];
-        }
+  const onError = (err: ApolloError) => {
+    handleGqlError({location: 'useGetOrder', error: err});
+  };
 
-        return prevOrders;
-      });
-      setLoading(false);
-    }, 2000);
-  }, [orders.length]);
+  const [getOrders, {loading}] = useLazyQuery(GET_ORDERS, {
+    onCompleted: onGetOrders,
+    onError,
+  });
 
   return {
     orders,
     loading,
     getOrders,
-    getMoreOrders,
   };
 };
 

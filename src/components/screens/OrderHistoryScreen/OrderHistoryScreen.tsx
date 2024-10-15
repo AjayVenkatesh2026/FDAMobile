@@ -23,24 +23,17 @@ const itemSeparator = () => <View style={styles.separator} />;
 
 const OrderHistoryScreen = () => {
   const theme = useAppSelector(state => state.themeReducer.theme);
-  const {loading, orders, getMoreOrders, getOrders} = useGetOrders();
+  const {loading, orders, getOrders} = useGetOrders();
 
   useEffect(() => {
     getOrders();
   }, [getOrders]);
 
-  const onEndReached = () => {
-    getMoreOrders();
-  };
-
   return (
     <View style={styles.container}>
       <Header
         showBack
-        containerStyles={[
-          styles.headerContainer,
-          getThemedStyles({backgroundColor: theme?.highlight}),
-        ]}>
+        containerStyles={getThemedStyles({backgroundColor: theme?.highlight})}>
         <Text
           variant="titleMedium"
           style={[styles.title, getThemedStyles({color: theme?.textHigh})]}>
@@ -53,7 +46,6 @@ const OrderHistoryScreen = () => {
         keyExtractor={keyExtractor}
         contentContainerStyle={styles.listContainer}
         onEndReachedThreshold={0.7}
-        onEndReached={onEndReached}
         ItemSeparatorComponent={itemSeparator}
         ListFooterComponent={
           loading ? (
@@ -72,9 +64,6 @@ export default OrderHistoryScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  headerContainer: {
-    marginLeft: 24,
   },
   title: {
     ...font.semiBold,
