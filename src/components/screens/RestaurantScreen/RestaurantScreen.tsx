@@ -14,6 +14,7 @@ import {ActivityIndicator, Text} from 'react-native-paper';
 import containers from 'src/styles/containers';
 import font from 'src/styles/font';
 import copies from 'src/constants/copies';
+import RestaurantScreenHeader from './RestaurantScreenHeader';
 
 const {SORRY_THERE_ARE_NO_ITEMS_FOR_THIS_RESTAURANT} = copies;
 
@@ -43,25 +44,40 @@ const RestaurantScreen = () => {
   }
 
   return (
-    <FlatList
-      data={menuItems}
-      renderItem={renderItem}
-      ListHeaderComponent={<ListHeader restaurant={restaurant} />}
-      keyExtractor={keyExtractor}
-      style={[styles.container, {backgroundColor: theme?.surface}]}
-      ListFooterComponent={<ListFooter restaurant={restaurant} />}
-      ListEmptyComponent={
-        <Text variant="bodyMedium" style={styles.empty}>
-          {SORRY_THERE_ARE_NO_ITEMS_FOR_THIS_RESTAURANT}
-        </Text>
-      }
-    />
+    <>
+      <View
+        style={[
+          styles.headerContainer,
+          {
+            borderBottomColor: theme?.borderPrimary,
+          },
+        ]}>
+        <RestaurantScreenHeader />
+      </View>
+      <FlatList
+        data={menuItems}
+        renderItem={renderItem}
+        ListHeaderComponent={<ListHeader restaurant={restaurant} />}
+        keyExtractor={keyExtractor}
+        style={[styles.container, {backgroundColor: theme?.surface}]}
+        ListFooterComponent={<ListFooter restaurant={restaurant} />}
+        ListEmptyComponent={
+          <Text variant="bodyMedium" style={styles.empty}>
+            {SORRY_THERE_ARE_NO_ITEMS_FOR_THIS_RESTAURANT}
+          </Text>
+        }
+      />
+    </>
   );
 };
 
 export default RestaurantScreen;
 
 const styles = StyleSheet.create({
+  headerContainer: {
+    width: '100%',
+    borderBottomWidth: 1,
+  },
   container: {
     flex: 1,
   },

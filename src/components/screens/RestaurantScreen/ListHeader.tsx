@@ -1,13 +1,11 @@
-import {Dimensions, ImageBackground, StyleSheet, View} from 'react-native';
+import {Dimensions, StyleSheet, View} from 'react-native';
 import React from 'react';
 
-import LinearGradient from 'react-native-linear-gradient';
-
-import Header from './Header';
 import RestaurantDetails from './RestaurantDetails';
 import {IRestaurant} from 'src/types/ordering';
 import copies from 'src/constants/copies';
 import Title from 'src/components/atoms/Title';
+import FDAImage from 'src/components/atoms/FDAImage';
 
 const {MENU_ITEMS} = copies;
 
@@ -23,8 +21,8 @@ const ListHeader: React.FC<IListHeaderProps> = ({restaurant}) => {
 
   return (
     <View>
-      <ImageBackground source={{uri: image}} style={styles.bgImage}>
-        <LinearGradient
+      <FDAImage url={image} style={styles.bgImage} />
+      {/* <LinearGradient
           start={{x: 0.5, y: 0}}
           end={{x: 0.5, y: 1}}
           style={styles.container}
@@ -34,10 +32,9 @@ const ListHeader: React.FC<IListHeaderProps> = ({restaurant}) => {
             'rgba(0, 0, 0, 0)',
             'rgba(0, 0, 0, 0)',
           ]}
-          locations={[0, 0.5, 0.5, 1]}>
-          <Header />
-        </LinearGradient>
-      </ImageBackground>
+          locations={[0, 0.5, 0.5, 1]}
+        /> */}
+      {/* </LinearGradient> */}
       <View style={styles.cardContainer}>
         <RestaurantDetails restaurant={restaurant} />
       </View>
@@ -49,9 +46,6 @@ const ListHeader: React.FC<IListHeaderProps> = ({restaurant}) => {
 export default ListHeader;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   bgImage: {
     height: imageHeight,
     resizeMode: 'cover',
