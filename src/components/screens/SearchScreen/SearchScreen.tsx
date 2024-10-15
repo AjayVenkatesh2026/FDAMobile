@@ -12,7 +12,7 @@ import copies from 'src/constants/copies';
 import {useAppSelector} from 'src/hooks/reduxHooks';
 import {CLOSE} from 'src/constants/icons';
 import containers from 'src/styles/containers';
-import {SEARCH_TYPES} from 'src/constants/search';
+import {SEARCH_TYPE_COPY, SEARCH_TYPES} from 'src/constants/search';
 import EmptySearch from './EmptySearch';
 import type {TSearchType} from 'src/types/global';
 import type {IProduct} from 'src/types/ordering';
@@ -22,7 +22,7 @@ import RestaurantMenuItem from 'src/components/organisms/RestaurantMenuItem/Rest
 const {width: WINDOW_WIDTH} = Dimensions.get('window');
 const imageWidth = WINDOW_WIDTH - 32;
 
-const {SEARCH, CATEGORIES, RESTAURANTS, DISHES} = copies;
+const {CATEGORIES, RESTAURANTS, DISHES} = copies;
 
 const renderItem = ({item}: {item: IProduct}) => (
   <RestaurantMenuItem product={item} showCategory showRestaurant />
@@ -74,7 +74,7 @@ const SearchScreen = () => {
         style={[styles.headerContainer, {borderColor: theme?.borderTertiary}]}>
         <Searchbar
           value={searchQuery}
-          placeholder={SEARCH}
+          placeholder={SEARCH_TYPE_COPY[searchType]}
           onChangeText={setSearchQuery}
           autoFocus
           onSubmitEditing={onSubmitEditing}

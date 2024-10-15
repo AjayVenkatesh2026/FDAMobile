@@ -6,4 +6,10 @@ const SEARCH_TYPES: Record<TSearchType, TSearchType> = {
   MENU_ITEMS: 'MENU_ITEMS',
 };
 
-export {SEARCH_TYPES};
+const SEARCH_TYPE_COPY: Record<TSearchType, string> = {
+  RESTAURANTS: 'Search Restaurants',
+  CATEGORIES: 'Search Categories',
+  MENU_ITEMS: 'Search Dishes',
+};
+
+export {SEARCH_TYPES, SEARCH_TYPE_COPY};
