@@ -5,18 +5,8 @@ import {useAppDispatch} from 'src/hooks/reduxHooks';
 import {updateProfile} from 'src/redux/slices/profileSlice';
 import {set} from 'src/storage';
 import keys from 'src/storage/keys';
-import type {IProfile} from 'src/types/ordering';
 import {handleGqlError} from 'src/utils/services';
-
-interface ILoginResposne {
-  user_login: {
-    __typename: string;
-    message: string;
-    statusCode: string;
-    token: string;
-    user: IProfile;
-  };
-}
+import type {ILoginResposne} from 'src/types/apis';
 
 const useLogin = ({onCompleted}: {onCompleted?: Function}) => {
   const dispatch = useAppDispatch();

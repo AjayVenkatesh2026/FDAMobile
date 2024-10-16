@@ -1,4 +1,4 @@
-import {StyleProp, TextStyle, View, ViewStyle} from 'react-native';
+import {View} from 'react-native';
 import React from 'react';
 
 import {Button, Text} from 'react-native-paper';
@@ -8,17 +8,9 @@ import containers from 'src/styles/containers';
 import font from 'src/styles/font';
 import {getThemedStyles} from 'src/utils/theme';
 import copies from 'src/constants/copies';
+import type {ITitleProps} from 'src/types/atoms';
 
 const {SEE_ALL} = copies;
-
-interface ITitleProps {
-  title: string;
-  onPress?: () => void;
-  containerStyles?: StyleProp<ViewStyle>;
-  showSeeAll?: boolean;
-  rightText?: string;
-  titleStyles?: StyleProp<TextStyle>;
-}
 
 const Title: React.FC<ITitleProps> = ({
   title,

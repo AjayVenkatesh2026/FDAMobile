@@ -26,10 +26,20 @@ interface IStrikedTextProps {
   containerStyles?: StyleProp<ViewStyle>;
 }
 
+interface ITitleProps {
+  title: string;
+  onPress?: () => void;
+  containerStyles?: StyleProp<ViewStyle>;
+  showSeeAll?: boolean;
+  rightText?: string;
+  titleStyles?: StyleProp<TextStyle>;
+}
+
 export type {
   IQuantityXProductProps,
   ISeparator,
   IHeading,
   IKeyValueProps,
   IStrikedTextProps,
+  ITitleProps,
 };

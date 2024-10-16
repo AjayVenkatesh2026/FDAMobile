@@ -3,19 +3,10 @@ import {ApolloError, useLazyQuery} from '@apollo/client';
 import {isEmpty} from 'radash';
 
 import {useAppDispatch} from 'src/hooks/reduxHooks';
-import type {ICategory} from 'src/types/ordering';
 import {GET_CATEGORIES} from '../gql/categories';
 import {addCategories} from 'src/redux/slices/categoriesSlice';
 import {handleGqlError} from 'src/utils/services';
-
-interface ICategoriesResponse {
-  resposne: {
-    __typename: string;
-    message: string;
-    statusCode: string;
-    categories: ICategory[];
-  };
-}
+import type {ICategoriesResponse} from 'src/types/apis';
 
 const useGetCategories = ({onCompleted}: {onCompleted?: Function}) => {
   const dispatch = useAppDispatch();

@@ -65,6 +65,8 @@ interface IJwtPaylod extends JwtPayload {
   role?: string;
 }
 
+type storeValueType = boolean | string | number | Uint8Array;
+
 export type {
   Style,
   TProfileOption,
@@ -74,4 +76,5 @@ export type {
   FDAImage,
   TSearchType,
   IJwtPaylod,
+  storeValueType,
 };

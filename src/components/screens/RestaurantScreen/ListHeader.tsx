@@ -2,19 +2,15 @@ import {Dimensions, StyleSheet, View} from 'react-native';
 import React from 'react';
 
 import RestaurantDetails from './RestaurantDetails';
-import {IRestaurant} from 'src/types/ordering';
 import copies from 'src/constants/copies';
 import Title from 'src/components/atoms/Title';
 import FDAImage from 'src/components/atoms/FDAImage';
+import type {IListHeaderProps} from 'src/types/screens/restaurant';
 
 const {MENU_ITEMS} = copies;
 
 const {height: WINDOW_HEIGHT} = Dimensions.get('window');
 const imageHeight = Math.floor(WINDOW_HEIGHT * 0.3);
-
-interface IListHeaderProps {
-  restaurant: IRestaurant;
-}
 
 const ListHeader: React.FC<IListHeaderProps> = ({restaurant}) => {
   const {image} = restaurant;

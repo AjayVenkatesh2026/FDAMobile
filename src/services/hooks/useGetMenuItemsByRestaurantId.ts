@@ -6,15 +6,7 @@ import type {IProduct} from 'src/types/ordering';
 import {handleGqlError} from 'src/utils/services';
 import {GET_MENU_ITEMS_BY_RESTAURANT_ID} from '../gql/menuItems';
 import {useCallback, useState} from 'react';
-
-interface IMenuItemsResponse {
-  response: {
-    __typename: string;
-    message: string;
-    statusCode: string;
-    menuItems: IProduct[];
-  };
-}
+import type {IMenuItemsResponse} from 'src/types/apis';
 
 const useGetMenuItemsByRestaurantId = ({
   onCompleted,

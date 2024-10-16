@@ -3,12 +3,12 @@ import React from 'react';
 
 import {Menu, Text} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
+import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
-import type {TProfileOption} from 'src/types/global';
 import font from 'src/styles/font';
 import {useAppDispatch, useAppSelector} from 'src/hooks/reduxHooks';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStackParamList} from 'src/types/navigator';
+import type {TProfileOption} from 'src/types/global';
+import type {RootStackParamList} from 'src/types/navigator';
 
 const {width: WINDOW_WIDTH} = Dimensions.get('window');
 
@@ -37,7 +37,6 @@ const ProfileOption = ({option}: {option: TProfileOption}) => {
     case 'Option':
       return (
         <View style={styles.container}>
-          {/* TODO: maybe check how to change leading icon color */}
           <Menu.Item
             title={name}
             leadingIcon={option.icon}

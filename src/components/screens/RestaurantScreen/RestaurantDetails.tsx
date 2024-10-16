@@ -1,19 +1,14 @@
-import {StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import React from 'react';
 
 import {Card, Icon, Text} from 'react-native-paper';
 
-import type {IRestaurant} from 'src/types/ordering';
 import containers from 'src/styles/containers';
 import {GOOGLE_MAPS, STAR} from 'src/constants/icons';
 import {useAppSelector} from 'src/hooks/reduxHooks';
 import font from 'src/styles/font';
 import copies from 'src/constants/copies';
-
-interface IRestaurantDetailsProps {
-  restaurant: IRestaurant;
-  containerStyles?: StyleProp<ViewStyle>;
-}
+import type {IRestaurantDetailsProps} from 'src/types/screens/restaurant';
 
 const {OPENING_HOURS} = copies;
 

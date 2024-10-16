@@ -3,15 +3,11 @@ import React from 'react';
 
 import {useAppSelector} from 'src/hooks/reduxHooks';
 import RestaurantMenuItem from 'src/components/organisms/RestaurantMenuItem/RestaurantMenuItem';
-import {IRestaurant} from 'src/types/ordering';
 import Title from 'src/components/atoms/Title';
 import copies from 'src/constants/copies';
+import type {IMyBasketProps} from 'src/types/screens/baskets';
 
 const {MY_BASKET, ADD_ITEMS} = copies;
-
-interface IMyBasketProps {
-  restaurant: IRestaurant;
-}
 
 const MyBasket: React.FC<IMyBasketProps> = ({restaurant}) => {
   const cart = useAppSelector(state => state.cartReducer.products);

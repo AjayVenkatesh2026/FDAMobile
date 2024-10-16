@@ -7,15 +7,11 @@ import {Button, Text} from 'react-native-paper';
 import {useAppSelector} from 'src/hooks/reduxHooks';
 import copies from 'src/constants/copies';
 import font from 'src/styles/font';
+import type {IOTPContentProps} from 'src/types/screens/login';
 
 const {LOGIN, ENTER_OTP} = copies;
 
-interface IOTPContent {
-  number: string;
-  login: (props: {mobileNumber: string; otp: string}) => void;
-}
-
-const OTPContent: React.FC<IOTPContent> = ({number, login}) => {
+const OTPContent: React.FC<IOTPContentProps> = ({number, login}) => {
   const theme = useAppSelector(state => state.themeReducer.theme);
   const textRef = useRef<string>('');
 

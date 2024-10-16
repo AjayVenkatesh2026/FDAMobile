@@ -2,20 +2,11 @@ import {ApolloError, useLazyQuery} from '@apollo/client';
 
 import {isEmpty} from 'radash';
 
-import type {IProduct} from 'src/types/ordering';
 import {handleGqlError} from 'src/utils/services';
 import {GET_MENU_ITEMS} from '../gql/menuItems';
 import {useAppDispatch} from 'src/hooks/reduxHooks';
 import {addMenuItems} from 'src/redux/slices/menuItemsSlice';
-
-interface IMenuItemsResponse {
-  response: {
-    __typename: string;
-    message: string;
-    statusCode: string;
-    menuItems: IProduct[];
-  };
-}
+import type {IMenuItemsResponse} from 'src/types/apis';
 
 const useGetMenuItems = ({onCompleted}: {onCompleted?: Function}) => {
   const dispatch = useAppDispatch();

@@ -2,10 +2,10 @@ import {FlatList, StyleSheet, View} from 'react-native';
 import React from 'react';
 
 import {Divider, Text} from 'react-native-paper';
-import {RouteProp, useRoute} from '@react-navigation/native';
+import {type RouteProp, useRoute} from '@react-navigation/native';
 
 import Header from 'src/components/molecules/Header';
-import {ProductStackParamList} from 'src/types/navigator';
+import type {ProductStackParamList} from 'src/types/navigator';
 import font from 'src/styles/font';
 import {useAppSelector} from 'src/hooks/reduxHooks';
 import type {IProduct} from 'src/types/ordering';

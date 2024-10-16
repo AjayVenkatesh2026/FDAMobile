@@ -3,16 +3,12 @@ import React from 'react';
 
 import {Icon, Text, TouchableRipple} from 'react-native-paper';
 
-import type {TMysteryBag} from 'src/types/ordering';
 import containers from 'src/styles/containers';
 import FDAImage from 'src/components/atoms/FDAImage';
 import {BELL_BADGE_OUTLINE} from 'src/constants/icons';
 import {useAppSelector} from 'src/hooks/reduxHooks';
 import font from 'src/styles/font';
-
-interface IMysteryBag {
-  mysteryBag: TMysteryBag;
-}
+import type {IMysteryBag} from 'src/types/organisms';
 
 const MysteryBag: React.FC<IMysteryBag> = ({mysteryBag}) => {
   const theme = useAppSelector(state => state.themeReducer.theme);

@@ -9,6 +9,7 @@ import font from 'src/styles/font';
 import KeyValue from 'src/components/atoms/KeyValue';
 import {getFormattedPrice} from 'src/utils/helpers';
 import useGetCartDataPerRestaurant from 'src/hooks/useGetCartDataPerRestaurant';
+import type {IPaymentBreakdownProps} from 'src/types/screens/baskets';
 
 const {
   PAYMENT,
@@ -18,11 +19,6 @@ const {
   TO_PAY,
   PLATFORM_FEE,
 } = copies;
-
-interface IPaymentBreakdownProps {
-  restaurantId: string;
-  isPickup: boolean;
-}
 
 const PaymentBreakdown: React.FC<IPaymentBreakdownProps> = ({
   restaurantId,

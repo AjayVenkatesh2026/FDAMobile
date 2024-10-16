@@ -1,11 +1,11 @@
 import {isEmpty} from 'radash';
 import {MMKV} from 'react-native-mmkv';
 
-type valueType = boolean | string | number | Uint8Array;
+import type {storeValueType} from 'src/types/global';
 
 const storage = new MMKV();
 
-const set = (key: string, value: valueType) => {
+const set = (key: string, value: storeValueType) => {
   try {
     storage.set(key, value);
   } catch (e) {}
@@ -23,7 +23,7 @@ const deleteItem = (key: string) => {
   storage.delete(key);
 };
 
-const multiSet = (values: [string, valueType][]) => {
+const multiSet = (values: [string, storeValueType][]) => {
   if (!isEmpty(values)) {
     values.forEach(([key, value]) => {
       set(key, value);

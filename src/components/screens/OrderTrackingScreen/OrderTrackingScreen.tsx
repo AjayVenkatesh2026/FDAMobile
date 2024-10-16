@@ -23,14 +23,14 @@ import font from 'src/styles/font';
 import {getFormattedPrice} from 'src/utils/helpers';
 import containers from 'src/styles/containers';
 import {useAppSelector} from 'src/hooks/reduxHooks';
-
-import dummyMap from 'src/assets/dummy/maps/dummy-map-tracking.png';
-import dummyProfile from 'src/assets/dummy/delivery-partner/delivery-partner.png';
 import copies from 'src/constants/copies';
 import useGetOrder from 'src/services/hooks/useGetOrder';
 import {isEmpty} from 'radash';
 import type {IOrderResponse} from 'src/types/ordering';
 import type {RootStackParamList} from 'src/types/navigator';
+
+import dummyMap from 'src/assets/dummy/maps/dummy-map-tracking.png';
+import dummyProfile from 'src/assets/dummy/delivery-partner/delivery-partner.png';
 
 const {ORDER_NO} = copies;
 const ICON_SIZE = 20;

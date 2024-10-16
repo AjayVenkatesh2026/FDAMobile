@@ -1,13 +1,4 @@
-import {
-  ImageBackground,
-  ImageStyle,
-  Pressable,
-  StyleProp,
-  StyleSheet,
-  TextStyle,
-  View,
-  ViewStyle,
-} from 'react-native';
+import {ImageBackground, Pressable, StyleSheet, View} from 'react-native';
 import React from 'react';
 
 import {Icon, Text, TouchableRipple} from 'react-native-paper';
@@ -15,7 +6,6 @@ import {useNavigation} from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
-import type {IRestaurant} from 'src/types/ordering';
 import font from 'src/styles/font';
 import {getThemedStyles} from 'src/utils/theme';
 import {useAppSelector} from 'src/hooks/reduxHooks';
@@ -23,22 +13,11 @@ import copies from 'src/constants/copies';
 import containers from 'src/styles/containers';
 import {CLOCK_OUTLINE, HEART, HEART_OUTLINE} from 'src/constants/icons';
 import type {RootStackParamList} from 'src/types/navigator';
+import type {IRestaurantCarouselCardProps} from 'src/types/organisms';
 
 import defautImage from 'src/assets/default.png';
 
 const {DOT} = copies;
-
-interface IRestaurantCarouselCardProps {
-  restaurant: IRestaurant;
-  showTimings?: boolean;
-  bgImageStyles?: StyleProp<ImageStyle>;
-  titleStyles?: StyleProp<TextStyle>;
-  descriptionStyles?: StyleProp<TextStyle>;
-  taglineStyles?: StyleProp<TextStyle>;
-  clockIconSize?: number;
-  contentContainerStyles?: StyleProp<ViewStyle>;
-  showFavouriteIcon?: boolean;
-}
 
 const RestaurantCarouselCard: React.FC<IRestaurantCarouselCardProps> = ({
   restaurant,

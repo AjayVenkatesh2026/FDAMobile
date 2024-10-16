@@ -3,7 +3,6 @@ import React from 'react';
 
 import {Button, Text} from 'react-native-paper';
 
-import {IProduct, IRestaurant} from 'src/types/ordering';
 import FDAImage from 'src/components/atoms/FDAImage';
 import containers from 'src/styles/containers';
 import QuantitySelector from '../Product/QuantitySelector';
@@ -11,16 +10,9 @@ import {getFormattedPrice} from 'src/utils/helpers';
 import copies from 'src/constants/copies';
 import font from 'src/styles/font';
 import {useAppSelector} from 'src/hooks/reduxHooks';
+import type {IRestaurantMenuItemProps} from 'src/types/organisms';
 
 const {TODAY, SOLD_OUT, NOTIFY_ME} = copies;
-
-interface IRestaurantMenuItemProps {
-  product: IProduct;
-  restaurant?: IRestaurant;
-  showTimings?: boolean;
-  showCategory?: boolean;
-  showRestaurant?: boolean;
-}
 
 const RestaurantMenuItem: React.FC<IRestaurantMenuItemProps> = ({
   product,

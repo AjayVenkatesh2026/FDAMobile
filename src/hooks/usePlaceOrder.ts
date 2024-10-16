@@ -4,9 +4,13 @@ import {useCallback} from 'react';
 
 import useCreateOrder from 'src/services/hooks/useCreateOrder';
 import useGetCartDataPerRestaurant from './useGetCartDataPerRestaurant';
-import {IOrderInput, IOrderProduct, IOrderResponse} from 'src/types/ordering';
+import type {
+  IOrderInput,
+  IOrderProduct,
+  IOrderResponse,
+} from 'src/types/ordering';
 import {useAppDispatch, useAppSelector} from './reduxHooks';
-import {TDateISO} from 'src/types/date';
+import type {TDateISO} from 'src/types/date';
 import {clearCart} from 'src/redux/slices/cartSlice';
 
 const usePlaceOrder = ({

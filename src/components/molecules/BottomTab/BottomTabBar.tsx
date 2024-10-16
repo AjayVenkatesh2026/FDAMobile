@@ -1,4 +1,5 @@
 import React from 'react';
+import {StyleSheet} from 'react-native';
 
 import {CommonActions} from '@react-navigation/native';
 import {type BottomTabBarProps} from '@react-navigation/bottom-tabs';
@@ -8,7 +9,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import type {BottomTabOption} from 'src/types/navigator';
 import {useAppSelector} from 'src/hooks/reduxHooks';
 import {getThemedStyles} from 'src/utils/theme';
-import {StyleSheet} from 'react-native';
 
 const renderTabIcon = ({
   color,

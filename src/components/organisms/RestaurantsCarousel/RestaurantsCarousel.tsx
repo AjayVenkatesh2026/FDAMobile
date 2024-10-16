@@ -3,7 +3,7 @@ import React from 'react';
 
 import {Button, Text} from 'react-native-paper';
 
-import {IRestaurant} from 'src/types/ordering';
+import type {IRestaurant} from 'src/types/ordering';
 import RestaurantCarouselCard from '../RestaurantCarouselCard/RestaurantCarouselCard';
 import containers from 'src/styles/containers';
 import {useAppSelector} from 'src/hooks/reduxHooks';
@@ -19,7 +19,7 @@ const renderItem = ({item}: {item: IRestaurant}) => (
 
 const keyExtractor = (item: IRestaurant) => item.id;
 
-const RestaurantsCarousel = () => {
+const RestaurantsCarousel: React.FC = () => {
   const theme = useAppSelector(state => state.themeReducer.theme);
   const restaurants = useAppSelector(
     state => state.restaurantsReducer.restaurants,

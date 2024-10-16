@@ -3,15 +3,9 @@ import React from 'react';
 
 import {Text} from 'react-native-paper';
 
-import {IPaymentMethod} from 'src/types/ordering';
 import containers from 'src/styles/containers';
 import {useAppSelector} from 'src/hooks/reduxHooks';
-
-interface IPaymentMethodProps {
-  paymentMethod: IPaymentMethod;
-  onPress?: (id: IPaymentMethod) => void;
-  selectedMethodId: string;
-}
+import type {IPaymentMethodProps} from 'src/types/organisms';
 
 const PaymentMethod: React.FC<IPaymentMethodProps> = ({
   paymentMethod,

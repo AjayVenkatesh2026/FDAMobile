@@ -3,7 +3,6 @@ import {ApolloError, useLazyQuery} from '@apollo/client';
 import {isEmpty} from 'radash';
 
 import {useAppDispatch} from 'src/hooks/reduxHooks';
-import type {IRestaurantResponse} from 'src/types/ordering';
 import {GET_RESTAURANTS} from '../gql/restaurants';
 import {
   addCollectNowRestaurants,
@@ -16,20 +15,12 @@ import {
   getCollectNowRestaurants,
   getNewRestaurants,
 } from 'src/utils/restaurant';
-
-interface IRestaurantsResponse {
-  response: {
-    __typename: string;
-    message: string;
-    statusCode: string;
-    restaurants: IRestaurantResponse[];
-  };
-}
+import type {IGetRestaurantsResponse} from 'src/types/apis';
 
 const useGetRestaurants = ({onCompleted}: {onCompleted?: Function}) => {
   const dispatch = useAppDispatch();
 
-  const onGetRestaurants = (data: IRestaurantsResponse) => {
+  const onGetRestaurants = (data: IGetRestaurantsResponse) => {
     const {response: {restaurants = []} = {}} = data;
     const newRestaurants = restaurants.map(
       translateRestaurantResponseToRestaurant,

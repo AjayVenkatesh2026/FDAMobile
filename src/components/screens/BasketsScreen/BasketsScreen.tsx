@@ -18,7 +18,7 @@ import PaymentBreakdown from './PaymentBreakdown';
 import PaymentMethods from 'src/components/organisms/PaymentMethods/PaymentMethods';
 import type {RootStackParamList} from 'src/types/navigator';
 import usePlaceOrder from 'src/hooks/usePlaceOrder';
-import {IOrderResponse} from 'src/types/ordering';
+import type {IOrderResponse} from 'src/types/ordering';
 
 const {CHECKOUT, DELIVERY, PICKUP, EMPTY_BASKET} = copies;
 
@@ -34,8 +34,7 @@ const BasketsScreen = () => {
   const cartRestaurant = getCartRestaurant(cart, restaurants);
 
   const onCompleted = (data: IOrderResponse) => {
-    // TODO: remove hard coded order id 18ea888b-8fad-40ed-9f3b-d7c86902900a
-    const {id = '18ea888b-8fad-40ed-9f3b-d7c86902900a'} = data;
+    const {id = ''} = data;
 
     navigation.navigate('OrderStack', {
       screen: 'OrderSuccess',

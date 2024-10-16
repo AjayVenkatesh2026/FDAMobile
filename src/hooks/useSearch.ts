@@ -3,9 +3,9 @@ import {SEARCH_TYPES} from 'src/constants/search';
 
 import {debounce} from 'radash';
 
-import {TSearchType} from 'src/types/global';
-import {IProduct} from 'src/types/ordering';
 import {useAppSelector} from './reduxHooks';
+import type {TSearchType} from 'src/types/global';
+import type {IProduct} from 'src/types/ordering';
 
 const useSearch = () => {
   const [response, setResponse] = useState<IProduct[]>([]);

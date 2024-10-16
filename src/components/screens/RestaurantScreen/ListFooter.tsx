@@ -3,8 +3,6 @@ import React from 'react';
 
 import {Divider, Icon, Text} from 'react-native-paper';
 
-import {IRestaurant} from 'src/types/ordering';
-import {IReview} from 'src/types/screens/restaurant';
 import Title from 'src/components/atoms/Title';
 import copies from 'src/constants/copies';
 import {reviews} from 'src/constants/restaurant';
@@ -12,10 +10,8 @@ import {useAppSelector} from 'src/hooks/reduxHooks';
 import containers from 'src/styles/containers';
 import font from 'src/styles/font';
 import {STAR} from 'src/constants/icons';
-
-interface IListFooterProps {
-  restaurant: IRestaurant;
-}
+import type {IReview} from 'src/types/screens/restaurant';
+import type {IListFooterProps} from 'src/types/screens/restaurant';
 
 const {REVIEWS, BASED_ON_72_RATINGS_OVER_THE_PAST_MONTH, ABOUT_STORE} = copies;
 

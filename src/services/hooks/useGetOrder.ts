@@ -3,18 +3,9 @@ import {useCallback} from 'react';
 
 import {isEmpty} from 'radash';
 
-import type {IOrderResponse} from 'src/types/ordering';
 import {handleGqlError} from 'src/utils/services';
 import {GET_ORDER} from '../gql/order';
-
-interface IOrderByIdResponse {
-  response: {
-    __typename: string;
-    message: string;
-    statusCode: string;
-    order: IOrderResponse;
-  };
-}
+import type {IOrderByIdResponse} from 'src/types/apis';
 
 const useGetOrder = ({onCompleted}: {onCompleted?: Function}) => {
   const onGetOrder = (data: IOrderByIdResponse) => {

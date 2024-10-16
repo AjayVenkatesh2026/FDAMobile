@@ -7,18 +7,18 @@ import {
   useRoute,
 } from '@react-navigation/native';
 import {Button, Text} from 'react-native-paper';
+import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 import copies from 'src/constants/copies';
-import {
+import type {
   RootStackParamList,
-  type OrderStackParamList,
+  OrderStackParamList,
 } from 'src/types/navigator';
 import {useAppSelector} from 'src/hooks/reduxHooks';
 import font from 'src/styles/font';
 
 import successDelivery from 'src/assets/order-success/rabbit-success-1.png';
 import successPickup from 'src/assets/order-success/rabbit-success-2.png';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 const {
   YOUR_ORDER_IS_CONFIRMED,

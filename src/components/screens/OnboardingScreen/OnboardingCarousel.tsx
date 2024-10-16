@@ -5,7 +5,7 @@ import Carousel, {Pagination} from 'react-native-snap-carousel';
 
 import {carouselItems} from 'src/constants/onboarding';
 import OnboardingCarouselItem from './OnboardingCarouselItem';
-import {IOnboardingCarouselItem} from 'src/types/screens/onboarding';
+import type {IOnboardingCarouselItem} from 'src/types/screens/onboarding';
 
 const {width: WINDOW_WIDTH} = Dimensions.get('window');
 

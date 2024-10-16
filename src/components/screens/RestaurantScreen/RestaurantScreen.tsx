@@ -1,13 +1,11 @@
 import {FlatList, StyleSheet, View} from 'react-native';
 import React, {useLayoutEffect} from 'react';
 
-import {RouteProp, useRoute} from '@react-navigation/native';
+import {type RouteProp, useRoute} from '@react-navigation/native';
 
-import {ProductStackParamList} from 'src/types/navigator';
 import RestaurantMenuItem from 'src/components/organisms/RestaurantMenuItem/RestaurantMenuItem';
 import {useAppSelector} from 'src/hooks/reduxHooks';
 import ListHeader from './ListHeader';
-import {IProduct} from 'src/types/ordering';
 import ListFooter from './ListFooter';
 import useGetMenuItemsByRestaurantId from 'src/services/hooks/useGetMenuItemsByRestaurantId';
 import {ActivityIndicator, Text} from 'react-native-paper';
@@ -15,6 +13,8 @@ import containers from 'src/styles/containers';
 import font from 'src/styles/font';
 import copies from 'src/constants/copies';
 import RestaurantScreenHeader from './RestaurantScreenHeader';
+import type {IProduct} from 'src/types/ordering';
+import type {ProductStackParamList} from 'src/types/navigator';
 
 const {SORRY_THERE_ARE_NO_ITEMS_FOR_THIS_RESTAURANT} = copies;
 

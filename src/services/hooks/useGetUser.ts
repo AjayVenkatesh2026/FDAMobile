@@ -3,21 +3,12 @@ import {ApolloError, useLazyQuery} from '@apollo/client';
 import {isEmpty} from 'radash';
 
 import {useAppDispatch} from 'src/hooks/reduxHooks';
-import type {IProfile} from 'src/types/ordering';
 import {GET_USER} from '../gql/user';
 import {getDecodedToken} from 'src/utils/helpers';
 import {updateProfile} from 'src/redux/slices/profileSlice';
 import {useCallback} from 'react';
 import {handleGqlError} from 'src/utils/services';
-
-interface IGetUserResponse {
-  resposne: {
-    __typename: string;
-    message: string;
-    statusCode: string;
-    user: IProfile;
-  };
-}
+import type {IGetUserResponse} from 'src/types/apis';
 
 const useGetUser = ({onCompleted}: {onCompleted?: Function}) => {
   const dispatch = useAppDispatch();

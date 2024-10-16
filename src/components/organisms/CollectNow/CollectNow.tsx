@@ -16,7 +16,7 @@ const renderItem = ({item}: {item: IRestaurant}) => (
   <RestaurantCarouselCard
     restaurant={item}
     showTimings
-    bgImageStyles={{width: itemWidth, height: itemWidth}}
+    bgImageStyles={styles.cardContainerStyles}
     titleStyles={styles.titleStyles}
     descriptionStyles={styles.descriptionStyles}
     taglineStyles={styles.taglineStyles}
@@ -50,6 +50,10 @@ export default CollectNow;
 const styles = StyleSheet.create({
   container: {
     marginTop: 16,
+  },
+  cardContainerStyles: {
+    width: itemWidth,
+    height: itemWidth,
   },
   titleStyles: {
     fontSize: 14,

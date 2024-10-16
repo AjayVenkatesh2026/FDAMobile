@@ -3,18 +3,13 @@ import React from 'react';
 
 import {Button, Icon, Text} from 'react-native-paper';
 
-import {IRestaurant} from 'src/types/ordering';
 import containers from 'src/styles/containers';
 import {useAppSelector} from 'src/hooks/reduxHooks';
 import {getThemedStyles} from 'src/utils/theme';
 import font from 'src/styles/font';
 import {DISTRIBUTION_DETAILS, DISTRIBUTION_TYPES} from 'src/constants/checkout';
 import copies from 'src/constants/copies';
-
-interface IDistributionDetailsProps {
-  isPickup?: boolean;
-  restaurant: IRestaurant;
-}
+import type {IDistributionDetailsProps} from 'src/types/screens/baskets';
 
 const {TO} = copies;
 

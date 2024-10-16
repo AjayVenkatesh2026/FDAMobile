@@ -3,18 +3,10 @@ import {useCallback} from 'react';
 
 import {isEmpty} from 'radash';
 
-import type {IOrderInput, IOrderResponse} from 'src/types/ordering';
+import type {IOrderInput} from 'src/types/ordering';
 import {handleGqlError} from 'src/utils/services';
 import {CREATE_ORDER} from '../gql/order';
-
-interface ICreateOrderResponse {
-  response: {
-    __typename: string;
-    message: string;
-    statusCode: string;
-    orders: IOrderResponse[];
-  };
-}
+import type {ICreateOrderResponse} from 'src/types/apis';
 
 const useCreateOrder = ({onCompleted}: {onCompleted?: Function}) => {
   const onGetOrder = (data: ICreateOrderResponse) => {
