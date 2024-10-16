@@ -9,7 +9,7 @@ import {useAppSelector} from 'src/hooks/reduxHooks';
 import PaymentMethod from './PaymentMethod';
 import {PAYMENT_METHODS} from 'src/constants/checkout';
 import containers from 'src/styles/containers';
-import {IPaymentMethod} from 'src/types/ordering';
+import type {IPaymentMethod} from 'src/types/ordering';
 
 const {PAYMENT_METHOD} = copies;
 
