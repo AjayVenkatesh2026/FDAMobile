@@ -52,7 +52,7 @@ const RestaurantInCart: FC<RestaurantInCartProps> = ({restaurantData}) => {
           getThemedStyles({backgroundColor: theme?.borderTertiary}),
         ]}>
         <RestaurantDetailsCard
-          description={restaurant.address.line_2}
+          description={restaurant.address}
           image={restaurant.image}
           name={restaurant.name}
         />

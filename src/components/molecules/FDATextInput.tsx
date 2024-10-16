@@ -28,16 +28,18 @@ const FDATextInput = ({
 
   return (
     <View style={[styles.container, containerStyles]}>
-      <Text
-        style={[
-          styles.label,
-          getThemedStyles({
-            color: theme?.textHigh,
-            backgroundColor: theme?.highlight,
-          }),
-        ]}>
-        {leftLabel}
-      </Text>
+      {leftLabel ? (
+        <Text
+          style={[
+            styles.label,
+            getThemedStyles({
+              color: theme?.textHigh,
+              backgroundColor: theme?.highlight,
+            }),
+          ]}>
+          {leftLabel}
+        </Text>
+      ) : null}
       <TextInput
         {...restProps}
         style={[

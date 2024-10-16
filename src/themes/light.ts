@@ -17,6 +17,8 @@ const backgroundPalette = {
   highlight: whitePalette.ghostWhite,
   primaryBGColor: whitePalette.lavendarBlush,
   modalBakcground: whitePalette.white50,
+  searchBackground: grayPalette.greyGoose,
+  paymentMethodBackground: whitePalette.catskillWhite,
 };
 
 const textPalette = {
@@ -42,6 +44,15 @@ const accentPalette = {
   accentPrimary: greenPalette.green,
 };
 
+const miscellaneous = {
+  starColor: redPalette.paleOrange,
+};
+
+const positivePalette = {
+  positivePrimary: greenPalette.darkPastelGreen,
+  positiveBG: greenPalette.aquaSprint,
+};
+
 const light = {
   name: LIGHT_THEME,
   ...primaryPalette,
@@ -50,6 +61,8 @@ const light = {
   ...bgTextPalette,
   ...borderPalette,
   ...accentPalette,
+  ...miscellaneous,
+  ...positivePalette,
 };
 
 export default light;

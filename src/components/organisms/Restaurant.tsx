@@ -12,12 +12,10 @@ import containers from 'src/styles/containers';
 import {STAR} from 'src/constants/icons';
 import copies from 'src/constants/copies';
 import FDAImage from '../atoms/FDAImage';
-import screenNames from 'src/constants/screenNames';
 import {RootStackParamList} from 'src/types/navigator';
 import type {IRestaurantProps} from 'src/types/organisms';
 
 const {MINS} = copies;
-const {productStackScreenNames} = screenNames;
 
 const Restaurant: React.FC<IRestaurantProps> = ({
   restaurant,
@@ -29,7 +27,7 @@ const Restaurant: React.FC<IRestaurantProps> = ({
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const theme = useAppSelector(state => state.themeReducer.theme);
-  const {name, image, distance, duration, rating} = restaurant;
+  const {name, image, distance, duration = '', rating} = restaurant;
   const description = `${distance} \u2022 ${duration} ${MINS}`;
 
   const onPressRestaurantCard = () => {
@@ -37,7 +35,7 @@ const Restaurant: React.FC<IRestaurantProps> = ({
       onPress();
     } else {
       navigation.navigate('ProductStack', {
-        screen: productStackScreenNames.ProductsScreen,
+        screen: 'ProductsScreen',
         params: {
           restaurant,
         },

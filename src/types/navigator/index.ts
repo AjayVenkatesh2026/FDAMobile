@@ -1,5 +1,5 @@
 import type {NavigatorScreenParams} from '@react-navigation/native';
-import {IRestaurant} from '../ordering';
+import {ICategory, IOrder, IRestaurant} from '../ordering';
 
 type BottomTabOption = {
   icon: string;
@@ -12,13 +12,23 @@ type AuthStackParamList = {
 
 type BottomTabParamList = {
   HomeScreen: undefined;
-  OrderHistoryScreen: undefined;
+  // OrderHistoryScreen: undefined;
   ProfileScreen: undefined;
+  CategoriesScreen: undefined;
+  FaviouritesScreen: undefined;
+  BasketsScreen: undefined;
 };
 
 type ProductStackParamList = {
   ProductsScreen: {
     restaurant: IRestaurant;
+  };
+  RestaurantScreen: {
+    restaurant: IRestaurant;
+  };
+  SearchScreen: undefined;
+  MenuItemsByCategoryScreen: {
+    category: ICategory;
   };
 };
 
@@ -27,6 +37,16 @@ type OrderStackParamList = {
   OrderDetails: {
     restaurantId: string;
   };
+  OrderSuccess: {
+    orderId: string;
+    isPickup: boolean;
+  };
+  OrderTrackingScreen: {
+    orderId?: string;
+    orderData?: IOrder;
+    goBackToHome?: boolean;
+  };
+  OrderHistory: undefined;
 };
 
 type RootStackParamList = {
@@ -35,6 +55,7 @@ type RootStackParamList = {
   BottomTab: NavigatorScreenParams<BottomTabParamList>;
   ProductStack: NavigatorScreenParams<ProductStackParamList>;
   OrderStack: NavigatorScreenParams<OrderStackParamList>;
+  OnboardingScreen: undefined;
 };
 
 type RootStackScreens =
@@ -42,15 +63,30 @@ type RootStackScreens =
   | 'AuthStack'
   | 'BottomTab'
   | 'ProductStack'
-  | 'OrderStack';
+  | 'OrderStack'
+  | 'OnboardingScreen';
 
 type AuthStackScreens = 'LoginScreen';
 
-type BottomTabScreens = 'HomeScreen' | 'OrderHistoryScreen' | 'ProfileScreen';
+type BottomTabScreens =
+  | 'HomeScreen'
+  | 'ProfileScreen'
+  | 'CategoriesScreen'
+  | 'FaviouritesScreen'
+  | 'BasketsScreen';
 
-type ProductStackScreens = 'ProductsScreen';
+type ProductStackScreens =
+  | 'ProductsScreen'
+  | 'RestaurantScreen'
+  | 'SearchScreen'
+  | 'MenuItemsByCategoryScreen';
 
-type OrderStackScreens = 'CartHomeScreen' | 'OrderDetails';
+type OrderStackScreens =
+  | 'CartHomeScreen'
+  | 'OrderDetails'
+  | 'OrderSuccess'
+  | 'OrderTrackingScreen'
+  | 'OrderHistory';
 
 interface ITab {
   name: BottomTabScreens;

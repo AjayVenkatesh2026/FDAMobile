@@ -10,7 +10,6 @@ import {getThemedStyles} from 'src/utils/theme';
 import type {THeaderProps} from 'src/types/global';
 import CartButton from './CartButton';
 
-// TODO: Add Cart icon button for trailing icon
 const Header = ({
   leadingIcon,
   trailingIcon,
@@ -23,18 +22,23 @@ const Header = ({
   showBack = false,
   showCart = false,
   leadingIconColor,
+  onPressBack,
 }: PropsWithChildren<THeaderProps>) => {
   const navigation = useNavigation();
   const theme = useAppSelector(state => state.themeReducer.theme);
 
-  const onPressBack = () => {
-    navigation.goBack();
+  const onPressBackIcon = () => {
+    if (onPressBack) {
+      onPressBack();
+    } else {
+      navigation.goBack();
+    }
   };
 
   return (
     <Appbar.Header style={[containerStyles]}>
       {showBack ? (
-        <Appbar.BackAction onPress={onPressBack} color={leadingIconColor} />
+        <Appbar.BackAction onPress={onPressBackIcon} color={leadingIconColor} />
       ) : null}
       {leadingIcon ? (
         <Appbar.Action
@@ -50,8 +54,9 @@ const Header = ({
             <Appbar.Action
               icon={trailingIcon}
               onPress={onPressTrailingIcon}
-              color={theme?.bgTextHigh}
+              color={theme?.textHigh}
               style={trailingIconStyles}
+              size={20}
             />
             {trailingIconLabel ? (
               <Text

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useLayoutEffect} from 'react';
 
 import {
   type BottomTabBarProps,
@@ -9,6 +9,7 @@ import type {BottomTabParamList} from 'src/types/navigator';
 import {tabs} from 'src/constants/bottomTab';
 import screenNames from 'src/constants/screenNames';
 import BottomTabBar from '../molecules/BottomTab/BottomTabBar';
+import useGetAppInit from 'src/hooks/useGetAppInit';
 
 const {bottomTabScreenNames} = screenNames;
 
@@ -31,6 +32,12 @@ const renderTabBar = ({
 };
 
 export default function BottomTab() {
+  const {getInitData} = useGetAppInit();
+
+  useLayoutEffect(() => {
+    getInitData();
+  }, [getInitData]);
+
   return (
     <Tab.Navigator
       screenOptions={{

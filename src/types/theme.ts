@@ -22,6 +22,11 @@ interface ITheme {
   borderTertiary: ColorValue;
   accentPrimary: ColorValue;
   modalBakcground: ColorValue;
+  searchBackground: ColorValue;
+  paymentMethodBackground: ColorValue;
+  starColor: ColorValue;
+  positivePrimary: ColorValue;
+  positiveBG: ColorValue;
 }
 
 export {type ITheme};

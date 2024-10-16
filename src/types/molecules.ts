@@ -1,4 +1,4 @@
-import type {IProduct} from './ordering';
+import type {IBanner, ICategory, IProduct} from './ordering';
 import type {IBillBreakdown} from './ordering';
 
 type TItem = {
@@ -26,10 +26,20 @@ interface IBillBreakdownProps {
   data: IBillBreakdown;
 }
 
+interface IBannersProps {
+  banners: IBanner[];
+}
+
+interface ICategoryItemProps {
+  category: ICategory;
+}
+
 export type {
   IProductsQuantitiesProps,
   TItem,
   IRestaurantDetailsCardProps,
   IProductItem,
   IBillBreakdownProps,
+  IBannersProps,
+  ICategoryItemProps,
 };

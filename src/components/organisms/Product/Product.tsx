@@ -10,7 +10,6 @@ import {getThemedStyles} from 'src/utils/theme';
 import containers from 'src/styles/containers';
 import FDAImage from 'src/components/atoms/FDAImage';
 import font from 'src/styles/font';
-import copies from 'src/constants/copies';
 import {getFormattedPrice} from 'src/utils/helpers';
 import QuantitySelector from './QuantitySelector';
 import type {ProductStackParamList} from 'src/types/navigator';
@@ -18,7 +17,6 @@ import type {IProductProps} from 'src/types/organisms';
 
 const {width: WINDOW_WIDTH} = Dimensions.get('window');
 const imageWidth = Math.floor(WINDOW_WIDTH * 0.3);
-const {RATINGS} = copies;
 
 const Product: React.FC<IProductProps> = ({product}) => {
   const theme = useAppSelector(state => state.themeReducer.theme);
@@ -27,11 +25,11 @@ const Product: React.FC<IProductProps> = ({product}) => {
   } = useRoute<RouteProp<ProductStackParamList, 'ProductsScreen'>>();
   const {
     name = '',
-    image = '',
+    image_url = '',
     description,
     rating,
     price,
-    num_of_ratings,
+    // num_of_ratings,
   } = product;
 
   return (
@@ -51,7 +49,7 @@ const Product: React.FC<IProductProps> = ({product}) => {
             imageSize={12}
             ratingBackgroundColor={theme?.surface}
           />
-          <Text
+          {/* <Text
             variant="bodySmall"
             style={[
               font.medium,
@@ -59,7 +57,7 @@ const Product: React.FC<IProductProps> = ({product}) => {
               styles.ratingText,
             ]}>
             {num_of_ratings} {RATINGS}
-          </Text>
+          </Text> */}
         </View>
         <Text variant="titleSmall" style={[font.semiBold, styles.price]}>
           {getFormattedPrice(price)}
@@ -77,7 +75,7 @@ const Product: React.FC<IProductProps> = ({product}) => {
         </Text>
       </View>
       <View>
-        <FDAImage url={image} style={styles.image} />
+        <FDAImage url={image_url} style={styles.image} />
         <QuantitySelector product={product} restaurant={restaurant} />
       </View>
     </View>

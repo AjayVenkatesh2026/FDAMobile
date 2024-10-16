@@ -1,17 +1,25 @@
-import {Dimensions, StyleSheet, View} from 'react-native';
+import {Image, ScrollView, StyleSheet, View} from 'react-native';
 import React from 'react';
 
-import {Avatar, Divider, Text} from 'react-native-paper';
+import {Text} from 'react-native-paper';
 
 import {useAppSelector} from 'src/hooks/reduxHooks';
-import {getInitials, isValidProfile} from 'src/utils/helpers';
+import {
+  getMobileNumberWithCountryCode,
+  isValidProfile,
+} from 'src/utils/helpers';
 import containers from 'src/styles/containers';
 import {getThemedStyles} from 'src/utils/theme';
 import {options} from 'src/constants/profile';
 import ProfileOption from './ProfileOption';
+import Header from 'src/components/molecules/Header';
+import {MENU_DOTS} from 'src/constants/icons';
+import copies from 'src/constants/copies';
+import font from 'src/styles/font';
 
-const {width: WINDOW_WIDTH} = Dimensions.get('window');
-const avatarWidth = Math.floor(0.3 * WINDOW_WIDTH);
+import profileDefault from 'src/assets/profile/profile-picture-default.png';
+
+const {MY_ACCOUNT} = copies;
 
 const ProfileScreen = () => {
   const profile = useAppSelector(state => state.profileReducer.profile);
@@ -21,48 +29,82 @@ const ProfileScreen = () => {
     return <></>;
   }
 
-  const {name} = profile;
-  const initials = getInitials({name});
-
   return (
-    <View
-      style={[
-        styles.container,
-        getThemedStyles({backgroundColor: theme?.backgroundColor}),
-      ]}>
-      {/* TODO: add header later */}
-      <Avatar.Text label={initials} size={avatarWidth} />
-      <Text variant="titleLarge" style={styles.name}>
-        {profile.name}
-      </Text>
-      <Divider
-        style={[
-          styles.divider,
-          getThemedStyles({backgroundColor: theme?.borderPrimary}),
-        ]}
-        bold
-      />
-      {options.map(option => (
-        <ProfileOption key={option.id} option={option} />
-      ))}
-    </View>
+    <ScrollView
+      style={[getThemedStyles({backgroundColor: theme?.surface})]}
+      contentContainerStyle={styles.container}>
+      <Header
+        trailingIcon={MENU_DOTS}
+        containerStyles={[
+          styles.headerContainer,
+          {borderBottomColor: theme?.borderSecondary},
+        ]}>
+        <View style={styles.headerMiddleContainer}>
+          <Text
+            variant="titleMedium"
+            style={[font.bold, {color: theme?.textHigh}]}>
+            {MY_ACCOUNT}
+          </Text>
+        </View>
+      </Header>
+      <View style={[styles.bodyContainer, {backgroundColor: theme?.surface}]}>
+        <View style={styles.profileContainer}>
+          <Image source={profileDefault} style={styles.profileImage} />
+          <View style={styles.detailsContainer}>
+            <Text variant="titleMedium" style={styles.name}>
+              {profile.name}
+            </Text>
+            <Text variant="bodyMedium" style={styles.phoneNumber}>
+              {getMobileNumberWithCountryCode(profile.phone)}
+            </Text>
+          </View>
+        </View>
+        {options.map(option => (
+          <ProfileOption key={option.id} option={option} />
+        ))}
+      </View>
+    </ScrollView>
   );
 };
 
 export default ProfileScreen;
 
 const styles = StyleSheet.create({
-  container: {
+  scrollView: {
     flex: 1,
-    ...containers.columnStartCenter,
+  },
+  container: {
+    paddingBottom: 24,
+  },
+  headerContainer: {
+    borderBottomWidth: 1,
+  },
+  headerMiddleContainer: {
+    flex: 1,
+    marginLeft: 16,
+  },
+  bodyContainer: {
     paddingHorizontal: 16,
-    paddingTop: 48,
-    backgroundColor: 'blue',
   },
   divider: {
     marginTop: 42,
   },
+  profileContainer: {
+    ...containers.rowCenterStart,
+    marginTop: 20,
+  },
+  profileImage: {
+    width: 80,
+    height: 80,
+    borderRadius: 80,
+  },
+  detailsContainer: {
+    marginLeft: 16,
+  },
   name: {
-    marginTop: 16,
+    ...font.semiBold,
+  },
+  phoneNumber: {
+    ...font.regular,
   },
 });

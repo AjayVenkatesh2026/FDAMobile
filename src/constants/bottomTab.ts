@@ -1,25 +1,43 @@
 import HomeScreen from 'src/components/screens/HomeScreen/HomeScreen';
-import OrderHistoryScreen from 'src/components/screens/OrderHistoryScreen/OrderHistoryScreen';
 import ProfileScreen from 'src/components/screens/ProfileScreen/ProfileScreen';
 import type {ITab} from 'src/types/navigator';
-import {ACCOUNT, HISTORY, HOME} from './icons';
+import {ACCOUNT, CART_OUTLINE, HEART_OUTLINE, HOME, TEXT_SEARCH} from './icons';
+import CategoriesScreen from 'src/components/screens/CategoriesScreen/CategoriesScreen';
+import FavouritesScreen from 'src/components/screens/FavouritesScreen/FavouritesScreen';
+import BasketsScreen from 'src/components/screens/BasketsScreen/BasketsScreen';
 
 const tabs: ITab[] = [
   {
     name: 'HomeScreen',
     component: HomeScreen,
-    color: 'pink',
     options: {
       icon: HOME,
       tabBarLabel: 'Home',
     },
   },
   {
-    name: 'OrderHistoryScreen',
-    component: OrderHistoryScreen,
+    name: 'CategoriesScreen',
+    component: CategoriesScreen,
     options: {
-      icon: HISTORY,
-      tabBarLabel: 'Orders',
+      icon: TEXT_SEARCH,
+      tabBarLabel: 'Browse',
+    },
+  },
+  {
+    name: 'FaviouritesScreen',
+    component: FavouritesScreen,
+    options: {
+      icon: HEART_OUTLINE,
+      tabBarLabel: 'Favourites',
+    },
+  },
+
+  {
+    name: 'BasketsScreen',
+    component: BasketsScreen,
+    options: {
+      icon: CART_OUTLINE,
+      tabBarLabel: 'Baskets',
     },
   },
   {

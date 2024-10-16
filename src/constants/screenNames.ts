@@ -12,6 +12,7 @@ const rootStackScreenNames: {[key in RootStackScreens]: RootStackScreens} = {
   BottomTab: 'BottomTab',
   ProductStack: 'ProductStack',
   OrderStack: 'OrderStack',
+  OnboardingScreen: 'OnboardingScreen',
 };
 
 const loginStackScreenNames: {[key in AuthStackScreens]: AuthStackScreens} = {
@@ -20,14 +21,19 @@ const loginStackScreenNames: {[key in AuthStackScreens]: AuthStackScreens} = {
 
 const bottomTabScreenNames: {[key in BottomTabScreens]: BottomTabScreens} = {
   HomeScreen: 'HomeScreen',
-  OrderHistoryScreen: 'OrderHistoryScreen',
   ProfileScreen: 'ProfileScreen',
+  CategoriesScreen: 'CategoriesScreen',
+  FaviouritesScreen: 'FaviouritesScreen',
+  BasketsScreen: 'BasketsScreen',
 };
 
 const productStackScreenNames: {
   [key in ProductStackScreens]: ProductStackScreens;
 } = {
   ProductsScreen: 'ProductsScreen',
+  RestaurantScreen: 'RestaurantScreen',
+  SearchScreen: 'SearchScreen',
+  MenuItemsByCategoryScreen: 'MenuItemsByCategoryScreen',
 };
 
 const orderStackScreenNames: {
@@ -35,6 +41,9 @@ const orderStackScreenNames: {
 } = {
   CartHomeScreen: 'CartHomeScreen',
   OrderDetails: 'OrderDetails',
+  OrderSuccess: 'OrderSuccess',
+  OrderTrackingScreen: 'OrderTrackingScreen',
+  OrderHistory: 'OrderHistory',
 };
 
 const screenNames = {

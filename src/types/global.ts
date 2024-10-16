@@ -6,16 +6,35 @@ import type {
   StyleProp,
   ImageProps,
 } from 'react-native';
+import {ITheme} from './theme';
+import type {JwtPayload} from 'jwt-decode';
+import {AppDispatch} from 'src/redux/store';
 
 type Style = ViewStyle | TextStyle | ImageStyle;
 
-interface IProfileOption {
-  id: string;
-  name: string;
+type TProfileType = 'Title' | 'Option';
+
+type TProfileOPtionOnClick = (props: {
+  navigation?: {navigate: Function; replace: Function};
+  dispatch?: AppDispatch;
+}) => void;
+
+type TProfileOptionTypeOption = {
+  type: 'Option';
   icon: string;
-  onClick: Function;
+  onClick: TProfileOPtionOnClick;
   trailingIcon?: string;
-}
+  iconColor?: keyof ITheme;
+};
+
+type TProfileOptionTypeTitle = {
+  type: 'Title';
+};
+
+type TProfileOption = {id: string; name: string} & (
+  | TProfileOptionTypeOption
+  | TProfileOptionTypeTitle
+);
 
 interface INavigation {
   navigate: Function;
@@ -26,16 +45,36 @@ type THeaderProps = {
   trailingIcon?: string;
   onPressLeadingIcon?: (event?: GestureResponderEvent) => void;
   onPressTrailingIcon?: (event?: GestureResponderEvent) => void;
-  trailingIconStyles?: Style;
+  trailingIconStyles?: StyleProp<Style>;
   trailingIconLabel?: string;
   containerStyles?: StyleProp<ViewStyle>;
   showBack?: boolean;
   leadingIconColor?: string;
   showCart?: boolean;
+  onPressBack?: () => void;
 };
 
 interface FDAImage extends ImageProps {
   url?: string;
 }
 
-export type {Style, IProfileOption, INavigation, THeaderProps, FDAImage};
+type TSearchType = 'RESTAURANTS' | 'CATEGORIES' | 'MENU_ITEMS';
+
+interface IJwtPaylod extends JwtPayload {
+  id?: string;
+  role?: string;
+}
+
+type storeValueType = boolean | string | number | Uint8Array;
+
+export type {
+  Style,
+  TProfileOption,
+  TProfileType,
+  INavigation,
+  THeaderProps,
+  FDAImage,
+  TSearchType,
+  IJwtPaylod,
+  storeValueType,
+};

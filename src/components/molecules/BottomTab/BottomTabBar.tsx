@@ -1,4 +1,5 @@
 import React from 'react';
+import {StyleSheet} from 'react-native';
 
 import {CommonActions} from '@react-navigation/native';
 import {type BottomTabBarProps} from '@react-navigation/bottom-tabs';
@@ -34,9 +35,15 @@ const BottomTabBar = ({
       navigationState={state}
       safeAreaInsets={insets}
       activeColor={theme?.primaryDefault}
-      style={getThemedStyles({backgroundColor: theme?.borderSecondary})}
+      style={[
+        styles.bottomTabContainer,
+        getThemedStyles({
+          backgroundColor: theme?.surface,
+          borderColor: theme?.borderPrimary,
+        }),
+      ]}
       activeIndicatorStyle={getThemedStyles({
-        backgroundColor: theme?.borderSecondary,
+        backgroundColor: theme?.surface,
       })}
       onTabPress={({route, preventDefault}) => {
         const event = navigation.emit({
@@ -80,5 +87,11 @@ const BottomTabBar = ({
     />
   );
 };
+
+const styles = StyleSheet.create({
+  bottomTabContainer: {
+    borderTopWidth: 1,
+  },
+});
 
 export default BottomTabBar;

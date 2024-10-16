@@ -1,34 +1,16 @@
-import {StyleSheet, Text} from 'react-native';
+import {Image, StyleSheet} from 'react-native';
 import React from 'react';
 
-import {getThemedStyles} from 'src/utils/theme';
-import {useAppSelector} from 'src/hooks/reduxHooks';
-import copies from 'src/constants/copies';
-import font from 'src/styles/font';
-
-const {FDA} = copies;
-
+import logo from 'src/assets/logo.png';
 const Logo = () => {
-  const theme = useAppSelector(state => state.themeReducer.theme);
-
-  return (
-    <Text
-      style={[
-        styles.title,
-        getThemedStyles({
-          color: theme?.bgTextHigh,
-        }),
-      ]}>
-      {FDA}
-    </Text>
-  );
+  return <Image source={logo} style={styles.image} />;
 };
 
 export default Logo;
 
 const styles = StyleSheet.create({
-  title: {
-    ...font.black,
-    fontSize: 52,
+  image: {
+    width: 170,
+    height: 170,
   },
 });

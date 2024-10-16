@@ -1,14 +1,12 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, View} from 'react-native';
 import React from 'react';
 
-import copies from 'src/constants/copies';
 import containers from 'src/styles/containers';
 import {getThemedStyles} from 'src/utils/theme';
 import {useAppSelector} from 'src/hooks/reduxHooks';
-import font from 'src/styles/font';
 import Logo from 'src/components/atoms/Logo';
 
-const {NUMBER_1_FOOD_DELIVERY_APP_IN_INDIA} = copies;
+import rabbit from 'src/assets/rabbit-splash-screen.png';
 
 const SplashScreen = () => {
   const theme = useAppSelector(state => state.themeReducer.theme);
@@ -17,15 +15,12 @@ const SplashScreen = () => {
     <View
       style={[
         styles.container,
-        getThemedStyles({backgroundColor: theme?.primaryDark}),
+        getThemedStyles({backgroundColor: theme?.primaryDefault}),
       ]}>
       <View style={styles.textContainer}>
         <Logo />
-        <Text
-          style={[styles.tagline, getThemedStyles({color: theme?.bgTextMid})]}>
-          {NUMBER_1_FOOD_DELIVERY_APP_IN_INDIA}
-        </Text>
       </View>
+      <Image source={rabbit} style={styles.rabbitImage} />
     </View>
   );
 };
@@ -38,16 +33,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   textContainer: {
+    flex: 1,
     ...containers.columnCenterCenter,
     width: '40%',
   },
-  title: {
-    ...font.black,
-    fontSize: 52,
-  },
-  tagline: {
-    ...font.medium,
-    fontSize: 14,
-    textAlign: 'center',
+  rabbitImage: {
+    width: 358,
+    height: 358,
   },
 });

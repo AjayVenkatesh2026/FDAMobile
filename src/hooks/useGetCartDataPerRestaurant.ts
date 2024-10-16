@@ -20,7 +20,8 @@ const useGetCartDataPerRestaurant = ({
       const products = Object.values(cartProducts).filter(
         product =>
           product.quantity > 0 &&
-          product.details.restaurant_id === restaurantId,
+          product.details.restaurant_id === restaurantId &&
+          product.details.is_available,
       );
 
       const groupedProductsByRestaurant = {[restaurantId]: products};
@@ -31,6 +32,10 @@ const useGetCartDataPerRestaurant = ({
       restaurant: null,
       orderData: {
         itemTotal: 0,
+        deliveryFee: 0,
+        platformFee: 0,
+        tax: 0,
+        pickupDiscount: 0,
       },
       products: [],
     };

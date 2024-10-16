@@ -1,7 +1,8 @@
 import {DUMMY_BILL_BREAKDOWN} from 'src/constants/dummyData';
 import type {ICartData, ICartProduct, IRestaurant} from 'src/types/ordering';
 
-const {DELIVERY_CHARGE, PLATFORM_FEE, TAX} = DUMMY_BILL_BREAKDOWN;
+const {DELIVERY_CHARGE, PLATFORM_FEE, TAX, PICKUP_DISCOUNT} =
+  DUMMY_BILL_BREAKDOWN;
 
 const getCartRestaurantData = ({
   restaurant,
@@ -24,6 +25,7 @@ const getCartRestaurantData = ({
       deliveryFee: DELIVERY_CHARGE,
       platformFee: PLATFORM_FEE,
       tax: TAX,
+      pickupDiscount: PICKUP_DISCOUNT,
     },
   };
 };
@@ -39,4 +41,19 @@ const getProductTotalAllRestaurants = (cart: {
   );
 };
 
-export {getCartRestaurantData, getProductTotalAllRestaurants};
+const getCartRestaurant = (
+  cart: {
+    [key: string]: ICartProduct;
+  },
+  restaurants: IRestaurant[],
+) => {
+  const restaurantId = Object.values(cart)?.[0]?.details?.restaurant_id;
+
+  return restaurants.find(res => res.id === restaurantId);
+};
+
+export {
+  getCartRestaurantData,
+  getProductTotalAllRestaurants,
+  getCartRestaurant,
+};

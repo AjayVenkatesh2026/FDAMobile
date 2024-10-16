@@ -4,6 +4,8 @@ const redPalette = {
   fuzzyWuzzyBrown: '#BF5252',
   duskyRose: '#BF6969',
   dirtyPink: '#DA7878',
+  roseMadder: '#ED2128',
+  paleOrange: '#F2AB58',
 };
 
 const whitePalette = {
@@ -13,6 +15,7 @@ const whitePalette = {
   lavendarBlush: '#FCF4F3',
   white75: 'rgba(255, 255, 255, 0.75)',
   white50: 'rgba(255, 255, 255, 0.50)',
+  catskillWhite: '#F0F5FA',
 };
 
 const bluePalette = {
@@ -24,10 +27,13 @@ const bluePalette = {
 const grayPalette = {
   lavendarGray: '#C5BFDB',
   gainsboro: '#D9DBE9',
+  greyGoose: '#D1D3D4',
 };
 
 const greenPalette = {
   green: 'green',
+  darkPastelGreen: '#4CAF50',
+  aquaSprint: '#EAFAEB',
 };
 
 const colors = {

@@ -9,23 +9,12 @@ import React from 'react';
 
 import {useAppSelector} from 'src/hooks/reduxHooks';
 import {getThemedStyles} from 'src/utils/theme';
-import containers from 'src/styles/containers';
 import copies from 'src/constants/copies';
 import font from 'src/styles/font';
 import FDATextInput from 'src/components/molecules/FDATextInput';
 import {button} from 'src/constants/styles';
 
-const {
-  NUMBER_1_FOOD_DELIVERY_APP_IN_INDIA_CAPITALIZED,
-  ENTER_MOBILE_NUMBER,
-  CONTINUE,
-  LOGIN_OR,
-  SIGN_UP,
-  BY_CONTINUING_YOU_AGREE_TO_OUT,
-  TERMS_AND_SERVICES,
-  PRIVACY_POLICY,
-  INDIA_COUNTRY_CODE,
-} = copies;
+const {EXAMPLE_PH_NO, CONTINUE, PHONE_NO, PHILIPPINES_COUNTRY_CODE} = copies;
 
 const LoginContent = ({
   number,
@@ -38,40 +27,22 @@ const LoginContent = ({
 }) => {
   const theme = useAppSelector(state => state.themeReducer.theme);
 
-  const onPressSignUp = () => {
-    // TODO: navigate to sign up page
-    console.log('navigate to sign up page');
-  };
-
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
-        <Text style={[styles.title, getThemedStyles({color: theme?.textHigh})]}>
-          {NUMBER_1_FOOD_DELIVERY_APP_IN_INDIA_CAPITALIZED}
-        </Text>
         <View style={styles.formContainer}>
           <View style={styles.textContainer}>
             <Text
               style={[styles.text, getThemedStyles({color: theme?.textMid})]}>
-              {LOGIN_OR}{' '}
+              {PHONE_NO}
             </Text>
-            <TouchableOpacity onPress={onPressSignUp} disabled>
-              <Text
-                style={[
-                  styles.signUpText,
-                  getThemedStyles({color: theme?.primaryDefault}),
-                ]}>
-                {SIGN_UP}
-              </Text>
-            </TouchableOpacity>
           </View>
           <FDATextInput
             value={number}
             onChangeText={onNumberChange}
-            placeholder={ENTER_MOBILE_NUMBER}
+            placeholder={EXAMPLE_PH_NO}
             keyboardType="numeric"
-            leftLabel={INDIA_COUNTRY_CODE}
-            autoFocus
+            leftLabel={PHILIPPINES_COUNTRY_CODE}
             maxLength={10}
             containerStyles={getThemedStyles({
               borderColor: theme?.borderSecondary,
@@ -94,19 +65,6 @@ const LoginContent = ({
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.footerContainer}>
-        <Text
-          style={[
-            styles.footerText,
-            getThemedStyles({color: theme?.textHigh}),
-          ]}>
-          {BY_CONTINUING_YOU_AGREE_TO_OUT}
-        </Text>
-        <Text
-          style={[styles.footerText, getThemedStyles({color: theme?.textLow})]}>
-          {TERMS_AND_SERVICES}, {PRIVACY_POLICY}
-        </Text>
-      </View>
     </View>
   );
 };
@@ -119,8 +77,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flexGrow: 1,
-    paddingTop: 32,
-    paddingHorizontal: 16,
+    paddingTop: 8,
   },
   title: {
     ...font.semiBold,
@@ -131,11 +88,10 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   textContainer: {
-    ...containers.rowCenterCenter,
     marginBottom: 12,
   },
   text: {
-    ...font.medium,
+    ...font.bold,
     fontSize: 13,
   },
   signUpText: {
@@ -144,15 +100,5 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 16,
-  },
-  footerContainer: {
-    ...containers.columnCenterCenter,
-    paddingHorizontal: 16,
-    paddingVertical: 16,
-    marginTop: 32,
-  },
-  footerText: {
-    ...font.regular,
-    fontSize: 14,
   },
 });
